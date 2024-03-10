@@ -1,9 +1,0 @@
-NyoModules.registerConfig({
-    config = {
-
-    },
-
-    locs = {
-
-    }
-})

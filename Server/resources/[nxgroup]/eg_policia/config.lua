@@ -6,7 +6,7 @@ config.webhookZerarTabelas = ""
 
 config.vrp_user_identities = true --CONFIG PRA CHECAR SE A BASE USA A TABELA VRP_USER_IDENTITIES
 
-config.nomePolicia = "Policia Leley Store"
+config.nomePolicia = "Base Leley Store V1"
 config.imgPolicia = "https://cdn.discordapp.com/attachments/904915489250246736/923774588595372032/logo.png"
 
 config.permComando = "comandante.permissao"
