@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="../modules/nyo_garages/web/style.css">
+</head>
+
+<body>
+    <div id="container_garagem">
+        <div class="content_garagem">
+            <div class="top_garagem">
+                <div class="showcar_garagem">
+                    <img src="../modules/nyo_garages/web/images/CAR.png" class="previewCar_garagem" alt="">
+                    <div class="nameModel_garagem">
+                        <div class="model_garagem">
+                            PICAPE
+                        </div>
+                        <div class="name_garagem">
+                            GARAGEM
+                        </div>
+                    </div>
+                    <div class="statusCar_garagem">
+                        <div class="stats_car_garagem">
+                            <p>STATUS</p>
+                            <span>Liberado</span>
+                        </div>
+                        <div class="type_garagem">
+                            <p>TIPO</p>
+                            <span class="garageType_garagem"></span>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="select_car_garagem">
+                    <img src="../modules/nyo_garages/web/../modules/nyo_garages/web/../modules/nyo_garages/web/../modules/nyo_garages/web/images/ESQUERDA.png" alt="" class="arrow_garagem arrow_left_garagem"
+                    onmouseup="selectVehicle('left', false)" onmousedown="selectVehicle('left', true)">
+                    <div class="list_car_garagem">
+                        
+                    </div>
+                    <img src="../modules/nyo_garages/web/../modules/nyo_garages/web/../modules/nyo_garages/web/../modules/nyo_garages/web/images/DIREITA.png" alt="" class="arrow_garagem arrow_right_garagem"
+                    onmouseup="selectVehicle('right', false)" onmousedown="selectVehicle('right', true)">
+                </div> -->
+                <div class="select_car_garagem">
+                    <input class="search_garagem" type="text" placeholder="Pesquisar veiculo" oninput="garage.search()">
+                    <div class="list_car_garagem" id="cascade-slider">
+                    </div>
+                </div>
+            </div>
+            <div class="bottom_garagem">
+                <div class="left_bottom_garagem">
+                    <h1>DADOS GERAIS</h1>
+                    <div class="list_info_cars_garagem">
+                        <div class="left_list_info_garagem">
+                            <div class="item_info_garagem">
+                                <div class="title_info_garagem">
+                                    VELOCIDADE
+                                </div>
+                                <div class="content_progress velocidade_garagem">
+                                    <div class="progress_garagem"><span></span></div>
+                                    <span class="result_garagem">360 KM/H</span>
+                                </div>
+                            </div>
+                            <div class="item_info_garagem">
+                                <div class="title_info_garagem">
+                                    FREIOS
+                                </div>
+                                <div class="content_progress freio_garagem">
+                                    <div class="progress_garagem"><span></span></div>
+                                    <span class="result_garagem">9.08</span>
+                                </div>
+                            </div>
+                            <div class="item_info_garagem">
+                                <div class="title_info_garagem">
+                                    TRAÇÃO
+                                </div>
+                                <div class="content_progress tracao_garagem">
+                                    <div class="progress_garagem"><span></span></div>
+                                    <span class="result_garagem">3.05</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="right_list_info_garagem">
+                            <div class="item_info_garagem">
+                                <div class="title_info_garagem">
+                                    MOTOR
+                                </div>
+                                <div class="content_progress motor_garagem">
+                                    <div class="progress_garagem"><span></span></div>
+                                    <span class="result_garagem">98%</span>
+                                </div>
+                            </div>
+                            <div class="item_info_garagem">
+                                <div class="title_info_garagem">
+                                    LATARIA
+                                </div>
+                                <div class="content_progress lataria_garagem">
+                                    <div class="progress_garagem"><span></span></div>
+                                    <span class="result_garagem">98%</span>
+                                </div>
+                            </div>
+                            <div class="item_info_garagem">
+                                <div class="title_info_garagem">
+                                    COMBUSTIVEL
+                                </div>
+                                <div class="content_progress combustivel_garagem">
+                                    <div class="progress_garagem"><span></span></div>
+                                    <span class="result_garagem">98%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="buttons_garagem">
+                        <div class="withdraw_garagem">RETIRAR</div>
+                        <div class="save_garagem" onclick="garage.storeVehicle()">GUARDAR</div>
+                        <!-- <div class="save_random_garagem" onclick="garage.storeNearestVehicle()">GUARDAR VEÍCULO PRÓXIMO</div> -->
+                    </div>
+                </div>
+                <div class="right_bottom_garagem">
+                    <div class="item_tunning_garagem motor_tuning_garagem">
+                        <img src="../modules/nyo_garages/web/images/engine.png" alt="">
+                        <div class="name_tunning_garagem">MOTOR</div>
+                        <div class="status_tunning_garagem active_tunning">ATIVADO</div>
+                    </div>
+                    <div class="item_tunning_garagem freio_tuning_garagem">
+                        <img src="../modules/nyo_garages/web/images/breaking.png" alt="">
+                        <div class="name_tunning_garagem">FREIOS</div>
+                        <div class="status_tunning_garagem">DESATIVADO</div>
+                    </div>
+                    <div class="item_tunning_garagem turbo_tuning_garagem">
+                        <img src="../modules/nyo_garages/web/images/turbo.png" alt="">
+                        <div class="name_tunning_garagem">TURBO</div>
+                        <div class="status_tunning_garagem">DESATIVADO</div>
+                    </div>
+                    <div class="item_tunning_garagem suspencao_tuning_garagem">
+                        <img src="../modules/nyo_garages/web/images/suspenssion.png" alt="">
+                        <div class="name_tunning_garagem">SUSPENSÂO</div>
+                        <div class="status_tunning_garagem">DESATIVADO</div>
+                    </div>
+                    <div class="item_tunning_garagem blindagem_tuning_garagem">
+                        <img src="../modules/nyo_garages/web/images/doors.png" alt="">
+                        <div class="name_tunning_garagem">BLINDAGEM</div>
+                        <div class="status_tunning_garagem">DESATIVADO</div>
+                    </div>
+                    <div class="item_tunning_garagem transmissao_tuning_garagem">
+                        <img src="../modules/nyo_garages/web/images/transmission.png" alt="">
+                        <div class="name_tunning_garagem">TRANSMISSÃO</div>
+                        <div class="status_tunning_garagem active_tunning">ATIVADO</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="../modules/nyo_garages/web/script.js"></script>
+<script src="../modules/nyo_garages/web/cascade.js"></script>
+</body>
+
+</html>

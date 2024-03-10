@@ -1,0 +1,34 @@
+{
+    "insufficientMoneyNotify": "Dinheiro insuficiente!",
+    "insufficientMoneyForTaxNotify": "Dinheiro insuficiente para pagar taxa da garagem.",
+    "isNotAllowedToSpawnCar": "Sem permissão",
+    "vehicleOfThatModelIsAlreadySpawned": "Já possui um veículo deste modelo fora da garagem.",
+    "occupiedCarSpaces": "Todas as vagas estão ocupadas!",
+    "vehicleIsFar": "Veículo preciso estar perto para ser guardado.",
+
+
+
+    "vehicleCategory": "Categoria:",
+    "payTax": "Pagar Taxas",
+    "payInsurance": "Acionar seguro",
+    "spawnVehicle": "Retirar",
+    "storeVehicle": "Guardar",
+    "maxSpeed": "Velocidade",
+    "engineHealth": "Motor",
+    "maxBraking": "Freio",
+    "bodyHealth": "Lataria",
+    "maxTraction": "Tração",
+    "fuelLevel": "Combustível",
+    "taxLate": "Taxas atrasadas",
+    "vehicleExploded": "Veículo explodido",
+    "vehicleImpounded": "Veículo detido",
+    "vehicleOk": "Liberado",
+    "garageType": "Tipo",
+    "taxLate2": "Taxa",
+    "insurance": "Seguro",
+    "garageTax": "Taxa de retirada",
+    "noTax": "Sem taxas",
+
+    "typeSellPrice": "VALOR",
+    "sellVehicle": "Vender"
+}

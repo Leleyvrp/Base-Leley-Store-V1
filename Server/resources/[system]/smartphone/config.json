@@ -1,0 +1,36 @@
+{
+  "token": "X",
+  "client": {
+    "bankType": "fleeca",
+    "videoServer": "ws://178.255.219.27:8080",
+    "isAndroid": true,
+    "case": "iphonexs",
+    "apps": {
+      "calculator": "nui/ios/calculator.webp",
+      "notes": "nui/ios/notes.webp",
+      "settings": "nui/ios/settings.webp",
+      "contacts": "nui/ios/contacts.webp",
+      "sms": "nui/ios/sms.webp",
+      "gallery": "nui/ios/gallery.webp",
+      "phone": "nui/ios/phone.webp",
+      "facetime": "nui/ios/facetime.webp"
+        },
+    "useGameClock": true,
+    "phone_template": "XXX-XXX",
+    "backgroundURL": "https://cdn.discordapp.com/attachments/1029907526487121975/1032318503308509304/backgroundURL.jpg",
+    "disabledApps": [ "minesweeper" , "paypal" , "ifood" ]
+  },
+  
+  "call_mode": "pma-voice",
+  "webhookURL": "",
+  "instagram_verify": "mindmaster.permissao",
+  "moderator": "moderador.permissao",
+  "item": "celular",
+  
+  "services": [
+    { "name": "Policia", "number":"190", "permission":"policia.permissao" },
+    { "name": "Paramédico", "number":"192", "permission":"paramedico.permissao" },
+    { "name": "Mecânico", "number":"193", "permission":"mecanico.permissao" },
+    { "name": "Taxi", "number":"0800 075", "permission":"taxi.permissao" }
+  ]
+}

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter" />
+    <link rel="stylesheet" href="../modules/nyo_fuel/web/style.css" />
+</head>
+
+<body>
+    <div class="PrimaryContainer-Fuel">
+    <div class="Container">
+        <div class="Section Section_Gasoline_Container_Image">
+            <div class="Texts">
+                <h1 style="font-size: 2.2rem;" class="Title">VALOR</h1>
+                <h1 style="font-size: 0.7rem;" class="RotateText">POR</h1>
+                <h1 style="font-size: 2.39rem;" id="TEXT_LITRO_1" class="SubTitle">LITRO</h1>
+            </div>
+
+            <div class="SectionAmount">
+                <h2>R$</h2>
+                <h1 id="AMOUNT_PER_UNITY">3,00</h1>
+            </div>
+            <div id="DirectionGas" class="AlignIcon">
+                <img id="GasIcon" class="Icon" src="../modules/nyo_fuel/web/assets/gasstation.png" />
+            </div>
+        </div>
+
+        <div class="Section Section_Gasoline_Container_Image">
+            <div class="Texts">
+                <h1 class="Title">VALOR</h1>
+                <h1 style="margin-left: 0;" class="SubTitle">TOTAL</h1>
+            </div>
+
+            <div class="SectionAmount">
+                <h2>R$</h2>
+                <h1 id="AMOUNT_TOTAL">950,00</h1>
+            </div>
+            <div id="DirectionMoney" class="AlignIcon">
+                <img id="MoneyIcon" class="Icon" src="../modules/nyo_fuel/web/assets/money.png" />
+            </div>
+        </div>
+
+        <div class="Section Section_Gasoline_Container_Image">
+            <div class="Texts">
+                <h1 style="font-size: 1.3rem;" class="Title">QUANTIDADE</h1>
+                <h1 style="margin-top: 0.93rem;" class="RotateText">EM</h1>
+                <h1 id="TEXT_LITRO_2" style="margin-top: 0rem;margin-left : 1.1rem;font-size: 2.2rem;" class="SubTitle">LITROS</h1>
+            </div>
+
+            <div class="SectionAmount">
+                <h2 id="TEXT_GASOLINE">R$</h2>
+                <h1 id="AMOUNT_GASOLINE_PRICE">12,00</h1>
+            </div>
+
+            <div id="DirectionGasoline" class="AlignIcon">
+                <img id="GasolineIcon" class="Icon" src="../modules/nyo_fuel/web/assets/gasoline.png" />
+            </div>
+        </div>
+
+        <div class="ContainerProgressBar">
+            <h1 class="Title">PROGRESSO DE ABASTECIMENTO</h1>
+            <div class="Progress">
+                <div id="GASOLINE_PROGRESS"></div>
+            </div>
+        </div>
+
+        <div class="ContainerButtons">
+            <button id="startGasoline">
+                <h1>ABASTECER</h1>
+            </button>
+
+            <button id="stopGasoline">
+                <h1>PARAR</h1>
+            </button>
+        </div>
+    </div>
+    </div>
+    <script src="../modules/nyo_fuel/web/script.js"></script>
+</body>
+
+</html>
