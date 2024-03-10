@@ -19,7 +19,7 @@ NyoModules.registerConfig({
           [GetHashKey('dilettante')] = { modelname = 'dilettante', name = 'Dilettante', price = 60000, trunk = 30, type = 'carros', banned = false },
           [GetHashKey('f4rr')] = { modelname = 'f4rr', name = 'Agusta F4RR', price = 1100100, trunk = 20, type = 'exclusive', banned = false },
           [GetHashKey('dm1200_02')] = { modelname = 'dm1200_02', name = 'DM 1200', price = 1100100, trunk = 20, type = 'exclusive', banned = false },
-          [GetHashKey('nxchuteira')] = { modelname = 'nxchuteira', name = 'Leley Store World Cup', price = 800000, trunk = 50, type = 'exclusive', banned = false },
+          [GetHashKey('nxchuteira')] = { modelname = 'nxchuteira', name = 'Base Leley Store V1 World Cup', price = 800000, trunk = 50, type = 'exclusive', banned = false },
           [GetHashKey('cbb')] = { modelname = 'cbb', name = 'CBB', price = 1100100, trunk = 20, type = 'exclusive', banned = false },
           [GetHashKey('africa')] = { modelname = 'africa', name = 'Africat2', price = 800000, trunk = 20, type = 'exclusive', banned = false },
           [GetHashKey('R1200GS')] = { modelname = 'R1200GS', name = 'R1200GS', price = 1100100, trunk = 20, type = 'exclusive', banned = false },

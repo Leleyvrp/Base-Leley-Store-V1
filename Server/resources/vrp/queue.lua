@@ -23,15 +23,15 @@ Config.IsBanned = function(src,callback)
 end
 
 Config.Language = {
-	joining = " [ Leley Store ] \n\nEntrando...",
-	connecting = " [ Leley Store ] \n\nConectando...",
-	err = " [ Leley Store ] \n\nNão foi possível identificar sua Steam ou Social Club.",
-	_err = " [ Leley Store ] \n\nVocê foi desconectado por demorar demais na fila.",
-	pos = " [ Leley Store ] \n\nVocê é o %d/%d da fila, aguarde sua conexão...\n\nAdquira VIP para obter prioridade na fila: loja.EVO.com",
-	connectingerr = " [ Leley Store ] \n\nNão foi possível adiciona-lo na fila.\ninstagram.com/evoroleplay",
-    wlonly = " [ Leley Store ] \n\nVocê não está aprovado na whitelist.\n\ninstagram.com/evoroleplay",
-	banned = " [ Leley Store ] \n\nSeu passaporte foi revogado na cidade.\n\ninstagram.com/evoroleplay",
-	steam = " [ Leley Store ] \n\nVocê precisa estar com a Steam aberta para conectar."
+	joining = " [ Base Leley Store V1 ] \n\nEntrando...",
+	connecting = " [ Base Leley Store V1 ] \n\nConectando...",
+	err = " [ Base Leley Store V1 ] \n\nNão foi possível identificar sua Steam ou Social Club.",
+	_err = " [ Base Leley Store V1 ] \n\nVocê foi desconectado por demorar demais na fila.",
+	pos = " [ Base Leley Store V1 ] \n\nVocê é o %d/%d da fila, aguarde sua conexão...\n\nAdquira VIP para obter prioridade na fila: loja.EVO.com",
+	connectingerr = " [ Base Leley Store V1 ] \n\nNão foi possível adiciona-lo na fila.\ninstagram.com/evoroleplay",
+    wlonly = " [ Base Leley Store V1 ] \n\nVocê não está aprovado na whitelist.\n\ninstagram.com/evoroleplay",
+	banned = " [ Base Leley Store V1 ] \n\nSeu passaporte foi revogado na cidade.\n\ninstagram.com/evoroleplay",
+	steam = " [ Base Leley Store V1 ] \n\nVocê precisa estar com a Steam aberta para conectar."
 }
 
 local Queue = {}
