@@ -74,14 +74,17 @@ end)
 -- 		--TriggerEvent("vrp_admin:KickAll")
 -- 	end
 -- end)
-
-AddEventHandler("vRP:playerSpawn",function(user_id,source,first_spawn)
-    local source = source
-    Wait(10000)
-    TriggerClientEvent('chatMessage',source,"",{255, 0, 102},"@Prefeitura ^0Seja bem-vindo(a) a cidade, tenha um ótimo RP!! discord.gg/evorj")
-end)
-
-
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- PLAYER SPAWN
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- AddEventHandler("vRP:playerSpawn",function(user_id,source,first_spawn)
+--     local source = source
+--     Wait(10000)
+--     TriggerClientEvent('chatMessage',source,"",{255, 0, 102},"@Prefeitura ^0Seja bem-vindo(a) a cidade, tenha um ótimo RP!! https://discord.gg/6QhQQgp7dG")
+-- end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- TW
+----------------------------------------------------------------------------------------------------------------------------------------
 --[[RegisterCommand('tw', function(source, args, rawCommand)
     local message = rawCommand:sub(3)
     local user_id = vRP.getUserId(source)
@@ -94,7 +97,9 @@ end)
 end
 SendWebhookMessage(webhookchat,"[ID]: "..user_id.." "..identity.name.." "..identity.firstname.." \n[911]: "..message.." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S").." \r")
 end, false)]]--
-
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- ILEGAL
+-----------------------------------------------------------------------------------------------------------------------------------------
 RegisterCommand("ilegal",function(source,args,rawCommand)
     local source = source
     local user_id = vRP.getUserId(source)
@@ -110,8 +115,10 @@ RegisterCommand("ilegal",function(source,args,rawCommand)
         end
     end
 end)   
-
-RegisterCommand('911', function(source, args, rawCommand)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- 190
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterCommand('190', function(source, args, rawCommand)
     local message = rawCommand:sub(4)
     local user_id = vRP.getUserId(source)
     local identity = vRP.getUserIdentity(user_id)
@@ -121,7 +128,9 @@ RegisterCommand('911', function(source, args, rawCommand)
         SendWebhookMessage(webhookchat,"```prolog\n[ID]: "..user_id.." "..identity.name.." "..identity.firstname.." \n[COMANDO]: /911\n[MENSAGEM]:"..message.." \n"..os.date("[Data]: %d/%m/%Y [Hora]: %H:%M:%S  \r```"))
     end
 end, false)
-
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- 911A
+-----------------------------------------------------------------------------------------------------------------------------------------
 -- RegisterCommand('911a', function(source, args, rawCommand)
 --     local message = rawCommand:sub(5)
 --     local user_id = vRP.getUserId(source)
@@ -135,7 +144,9 @@ end, false)
 --     -- })
 --     end
 -- end, false)
-
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- 112
+-----------------------------------------------------------------------------------------------------------------------------------------
 RegisterCommand('112', function(source, args, rawCommand)
     local message = rawCommand:sub(4)
     local user_id = vRP.getUserId(source)
@@ -146,8 +157,9 @@ RegisterCommand('112', function(source, args, rawCommand)
         SendWebhookMessage(webhookchat,"```prolog\n[ID]: "..user_id.." "..identity.name.." "..identity.firstname.." \n[COMANDO]: /112\n[MENSAGEM]:"..message.." \n"..os.date("[Data]: %d/%m/%Y [Hora]: %H:%M:%S  \r```"))
     end
 end, false)
-
-
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- CLEAR CHAT
+-----------------------------------------------------------------------------------------------------------------------------------------
 RegisterCommand('clearchat', function(source)
     local user_id = vRP.getUserId(source);
     if user_id ~= nil then

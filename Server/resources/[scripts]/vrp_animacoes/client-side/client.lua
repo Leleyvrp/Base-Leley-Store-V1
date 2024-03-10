@@ -71,7 +71,6 @@ local beds = {
 -- ANIMATIONS
 -----------------------------------------------------------------------------------------------------------------------------------------
 local animacoes = {
-	--======= TODDYNHO =========
 	-- { nome = "posefoto1" , dict = "lunyx@random@v3@pose001" , anim = "random@v3@pose001" , andar = true , loop = true },
 	-- { nome = "posefoto2" , dict = "lunyx@random@v3@pose002" , anim = "random@v3@pose002" , andar = true , loop = true },
 	-- { nome = "posefoto3" , dict = "lunyx@random@v3@pose003" , anim = "random@v3@pose003" , andar = false , loop = true },
@@ -114,7 +113,7 @@ local animacoes = {
 	-- { nome = "posefoto37" , dict = "mymsign20@animacion" , anim = "mymsign20_clip" , andar = false , loop = true },
 	-- { nome = "posefoto38" , dict = "mymsign30@animacion" , anim = "mymsign30_clip" , andar = false , loop = true },
 	-- { nome = "posefoto39" , dict = "anim@selfie_knees_cute" , anim = "knees_cute_clip" , prop = "prop_rag_01" , flag = 50 , andar = false , loop = true },
-	--======= TODDYNHO =========
+
 
 
 
@@ -1851,9 +1850,9 @@ function drawNativeNotification(text)
     DisplayHelpTextFromStringLabel(0, 0, 1, -1)
 end
 
-------------------------------------------------------------
--- TODDYNHO
-------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- WEB BANDIDO
+-----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNetEvent('webbandido')
 AddEventHandler('webbandido', function()
 

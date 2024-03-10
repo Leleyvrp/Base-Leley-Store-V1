@@ -16,7 +16,7 @@ Proxy.addInterface("vrp_player",src)
 
 
 -----------------------------------------------------------------------------------------------------------------------------------------
---[ WEBHOOK ]----------------------------------------------------------------------------------------------------------------------------
+-- WEBHOOK 
 -----------------------------------------------------------------------------------------------------------------------------------------
 vRP.prepare ("EG/controleChamados", "INSERT INTO eg_controle_staff(user_id,chamados) VALUES(@user_id,@chamados)")
 vRP.prepare ("EG/addVipStarter", "INSERT INTO fstore_appointments(command,expires_at) VALUES(@string,CURRENT_DATE()+3)")
@@ -68,7 +68,7 @@ function src.getUserGroupByType(user_id,gtype)
 	return ""
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
---[ CHECK ROUPAS ]-----------------------------------------------------------------------------------------------------------------------
+-- CHECK ROUPAS
 -----------------------------------------------------------------------------------------------------------------------------------------
 function src.checkRoupas()
 	local source = source
@@ -84,7 +84,7 @@ function src.checkRoupas()
 end
 
 -----------------------------------------------------------------------------------------------------------------------------------------
---[ USER VEHS [ADMIN]]-------------------------------------------------------------------------------------------------------------------
+-- USER VEHS ADMIN
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterCommand('uservehs',function(source,args,rawCommand)
     local user_id = vRP.getUserId(source)
@@ -105,14 +105,14 @@ RegisterCommand('uservehs',function(source,args,rawCommand)
     end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
---[ RESKIN ]-----------------------------------------------------------------------------------------------------------------------------
+-- RESKIN 
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterCommand('reskin',function(source,rawCommand)
 	local user_id = vRP.getUserId(source)		
 	vRPclient._setCustomization(vRPclient.getCustomization(source))		
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
---[ ID ]---------------------------------------------------------------------------------------------------------------------------------
+-- ID
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterCommand('id',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
@@ -131,7 +131,7 @@ RegisterCommand('id',function(source,args,rawCommand)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
---[ SALÁRIO ]----------------------------------------------------------------------------------------------------------------------------
+-- SALÁRIO 
 -----------------------------------------------------------------------------------------------------------------------------------------
 local salarios = {
 	{ ['permissao'] = "bronze.permissao", ['nome'] = "Bronze", ['payment'] = 2000 },
@@ -219,7 +219,7 @@ function src.checkMasterPerm()
 end
 
 -----------------------------------------------------------------------------------------------------------------------------------------
---[ SEQUESTRO ]--------------------------------------------------------------------------------------------------------------------------
+-- SEQUESTRO
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterCommand('sequestro',function(source,args,rawCommand)
 	local nplayer = vRPclient.getNearestPlayer(source,5)
@@ -242,25 +242,25 @@ RegisterCommand('sequestro',function(source,args,rawCommand)
 end)
 
 -----------------------------------------------------------------------------------------------------------------------------------------
---[ ENTRAR NO PORTA MALA ]---------------------------------------------------------------------------------------------------------------
+-- ENTRAR NO PORTA MALA
 -----------------------------------------------------------------------------------------------------------------------------------------
--- RegisterCommand('entrarportamala',function(source,args,rawCommand)
--- 	local source = source
--- 	if source then
--- 		if not vRPclient.getNoCarro(source) then
--- 			local vehicle = vRPclient.getNearestVehicle(source,7)
--- 			if vehicle then
--- 				if vRPclient.getCarroClass(source,vehicle) then
--- 					vRPclient.setMalas(source)
--- 				end
--- 			end
--- 		elseif vRPclient.isMalas(source) then
--- 			vRPclient.setMalas(source)
--- 		end
--- 	end
--- end)
+RegisterCommand('entrarportamala',function(source,args,rawCommand)
+	local source = source
+	if source then
+		if not vRPclient.getNoCarro(source) then
+			local vehicle = vRPclient.getNearestVehicle(source,7)
+			if vehicle then
+				if vRPclient.getCarroClass(source,vehicle) then
+					vRPclient.setMalas(source)
+				end
+			end
+		elseif vRPclient.isMalas(source) then
+			vRPclient.setMalas(source)
+		end
+	end
+end)
 -----------------------------------------------------------------------------------------------------------------------------------------
---[ FINALIZAR ]--------------------------------------------------------------------------------------------------------------------------
+-- FINALIZAR
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterCommand('finalizar',function(source,args,rawCommand)
 	local source = source
@@ -278,7 +278,7 @@ RegisterCommand('finalizar',function(source,args,rawCommand)
 end)
 
 -----------------------------------------------------------------------------------------------------------------------------------------
--- /enviar
+-- enviar
 -----------------------------------------------------------------------------------------------------------------------------------------
 local mCooldown = {}
 RegisterCommand('enviar',function(source,args,rawCommand)
@@ -330,7 +330,6 @@ function src.checkServices()
 		end
 	end
 end
-
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- COBRAR PARAMEDICO E MECANICO 
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -396,7 +395,9 @@ Citizen.CreateThread( function()
     end
 end)
 
--- REVER
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- SOCORRO
+-----------------------------------------------------------------------------------------------------------------------------------------
 RegisterCommand("socorro",function(source,args,rawCommand)
     local source = source
     local user_id = vRP.getUserId(source)
@@ -444,14 +445,14 @@ RegisterCommand("socorro",function(source,args,rawCommand)
     end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
---[ TRYTOW ]-----------------------------------------------------------------------------------------------------------------------------
+-- TRYTOW
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterServerEvent("trytow")
 AddEventHandler("trytow",function(nveh,rveh)
 	TriggerClientEvent("synctow",-1,nveh,rveh)
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
---[ DENUNCIAR ]------------------------------------------------------------------------------------------------------------------------------
+-- DENUNCIAR
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterCommand("denunciar",function(source)
     local source = source
@@ -481,7 +482,7 @@ RegisterCommand("denunciar",function(source)
     end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
---[ CALL ]-------------------------------------------------------------------------------------------------------------------------------
+-- CALL
 -----------------------------------------------------------------------------------------------------------------------------------------
 local blips = {}
 local call = {}
@@ -602,7 +603,7 @@ RegisterCommand('call',function(source,args,rawCommand)
 end)
 
 -----------------------------------------------------------------------------------------------------------------------------------------
---[ REMOVER PROPRIO CAPUZ ]--------------------------------------------------------------------------------------------------------------
+-- REMOVER PROPRIO CAPUZ
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterCommand('rcapuz2',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
@@ -615,7 +616,7 @@ end)
 
 
 -----------------------------------------------------------------------------------------------------------------------------------------
--- [ OBJETOS ]
+-- OBJETOS 
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterCommand('objetos',function(source,rawCommand)
     local user_id = vRP.getUserId(source)
@@ -624,7 +625,7 @@ RegisterCommand('objetos',function(source,rawCommand)
 	TriggerClientEvent('cancelando',false)
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
---[ MEC ]--------------------------------------------------------------------------------------------------------------------------------
+-- MEC
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterCommand('jz',function(source,args,rawCommand)
 	if args[1] then
@@ -639,7 +640,7 @@ RegisterCommand('jz',function(source,args,rawCommand)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
---[ MEC ]--------------------------------------------------------------------------------------------------------------------------------
+-- MEC
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterCommand('mc',function(source,args,rawCommand)
 	if args[1] then
@@ -654,7 +655,7 @@ RegisterCommand('mc',function(source,args,rawCommand)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
---[ MR ]---------------------------------------------------------------------------------------------------------------------------------
+-- MR
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterCommand('mr',function(source,args,rawCommand)
 	if args[1] then
@@ -675,7 +676,7 @@ RegisterCommand('mr',function(source,args,rawCommand)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
--- /semems
+-- semems
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterCommand('semems',function(source,args,rawCommand)
     local source = source
@@ -708,7 +709,7 @@ RegisterCommand('semems',function(source,args,rawCommand)
     end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
--- /attachs
+-- attachs
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterCommand('attachs',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
@@ -721,7 +722,7 @@ RegisterCommand('attachs',function(source,args,rawCommand)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
--- /mascara
+-- mascara
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterCommand('mascara',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
@@ -736,7 +737,7 @@ RegisterCommand('mascara',function(source,args,rawCommand)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
--- /blusa
+-- blusa
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterCommand('blusa',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
@@ -759,7 +760,7 @@ RegisterCommand('blusa',function(source,args,rawCommand)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
--- /colete
+-- colete
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterCommand('colete',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
@@ -774,7 +775,7 @@ RegisterCommand('colete',function(source,args,rawCommand)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
--- /jaqueta
+-- jaqueta
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterCommand('jaqueta',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
@@ -790,7 +791,7 @@ RegisterCommand('jaqueta',function(source,args,rawCommand)
 end)
 
 -----------------------------------------------------------------------------------------------------------------------------------------
--- /maos
+-- maos
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterCommand('maos',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
@@ -805,7 +806,7 @@ RegisterCommand('maos',function(source,args,rawCommand)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
--- /calca
+-- calca
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterCommand('calca',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
@@ -820,7 +821,7 @@ RegisterCommand('calca',function(source,args,rawCommand)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
--- /acessorios
+-- acessorios
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterCommand('acessorios',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
@@ -834,9 +835,9 @@ RegisterCommand('acessorios',function(source,args,rawCommand)
 		end
 	end
 end)
------------------------------------------------
--- /sapatos ------------------------------------
------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- sapatos
+-----------------------------------------------------------------------------------------------------------------------------------------
 RegisterCommand('sapatos',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	if vRPclient.getHealth(source) > 101 then
@@ -849,9 +850,9 @@ RegisterCommand('sapatos',function(source,args,rawCommand)
 		end
 	end
 end)
------------------------------------------------
--- /chapeu ------------------------------------
------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- chapeu
+-----------------------------------------------------------------------------------------------------------------------------------------
 RegisterCommand('chapeu',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	if vRPclient.getHealth(source) > 101 then
@@ -864,9 +865,9 @@ RegisterCommand('chapeu',function(source,args,rawCommand)
 		end
 	end
 end)
------------------------------------------------
--- /oculos ------------------------------------
------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- oculos
+-----------------------------------------------------------------------------------------------------------------------------------------
 RegisterCommand('oculos',function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	if vRPclient.getHealth(source) > 101 then
@@ -879,9 +880,9 @@ RegisterCommand('oculos',function(source,args,rawCommand)
 		end
 	end
 end)
------------------------------------------------
--- /mochila -----------------------------------
------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- mochila
+-----------------------------------------------------------------------------------------------------------------------------------------
 RegisterCommand('mochila',function(source,args,rawCommand)
     local user_id = vRP.getUserId(source)
     if vRPclient.getHealth(source) > 101 then
@@ -894,9 +895,9 @@ RegisterCommand('mochila',function(source,args,rawCommand)
         end
     end
 end)
------------------------------------------------
--- /croupa ------------------------------------
------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- croupa
+-----------------------------------------------------------------------------------------------------------------------------------------
 RegisterCommand('croupa',function(source,args,rawCommand)
     local user_id = vRP.getUserId(source)
     local nearestplayer = vRPclient.getNearestPlayer(source,3)
@@ -907,47 +908,51 @@ RegisterCommand('croupa',function(source,args,rawCommand)
         end
     end
 end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- roupas
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterCommand('roupas',function(source,args,rawCommand)
+	local user_id = vRP.getUserId(source)
+	if vRPclient.getHealth(source) > 101 then
+		if not vRPclient.isHandcuffed(source) then
+			if not vRP.searchReturn(source,user_id) then
+				if args[1] then
+					local custom = roupas[tostring(args[1])]
+					if custom then
+						local old_custom = vRPclient.getCustomization(source)
+						local idle_copy = {}
 
--- RegisterCommand('roupas',function(source,args,rawCommand)
--- 	local user_id = vRP.getUserId(source)
--- 	if vRPclient.getHealth(source) > 101 then
--- 		if not vRPclient.isHandcuffed(source) then
--- 			if not vRP.searchReturn(source,user_id) then
--- 				if args[1] then
--- 					local custom = roupas[tostring(args[1])]
--- 					if custom then
--- 						local old_custom = vRPclient.getCustomization(source)
--- 						local idle_copy = {}
+						idle_copy = vRP.save_idle_custom(source,old_custom)
+						idle_copy.modelhash = nil
 
--- 						idle_copy = vRP.save_idle_custom(source,old_custom)
--- 						idle_copy.modelhash = nil
-
--- 						for l,w in pairs(custom[old_custom.modelhash]) do
--- 							idle_copy[l] = w
--- 						end
--- 						vRPclient._playAnim(source,true,{{"clothingshirt","try_shirt_positive_d"}},false)
--- 						Citizen.Wait(2500)
--- 						vRPclient._stopAnim(source,true)
--- 						vRPclient._setCustomization(source,idle_copy)
--- 					end
--- 				else
--- 					vRPclient._playAnim(source,true,{{"clothingshirt","try_shirt_positive_d"}},false)
--- 					Citizen.Wait(2500)
--- 					vRPclient._stopAnim(source,true)
--- 					vRP.removeCloak(source)
--- 				end
--- 			end
--- 		end
--- 	end
--- end)
-
--- RegisterCommand('comandinhodotio',function(source,args,rawCommand)
---     local user_id = vRP.getUserId(source)
---     if vRP.hasPermission(user_id,"mindmaster.permissao") then
---         TriggerClientEvent('rbgcar',source)
---         TriggerClientEvent("Notify",source,"sucesso","Você tunou o <b>veículo</b> RGB com sucesso.")
---     end
--- end)
+						for l,w in pairs(custom[old_custom.modelhash]) do
+							idle_copy[l] = w
+						end
+						vRPclient._playAnim(source,true,{{"clothingshirt","try_shirt_positive_d"}},false)
+						Citizen.Wait(2500)
+						vRPclient._stopAnim(source,true)
+						vRPclient._setCustomization(source,idle_copy)
+					end
+				else
+					vRPclient._playAnim(source,true,{{"clothingshirt","try_shirt_positive_d"}},false)
+					Citizen.Wait(2500)
+					vRPclient._stopAnim(source,true)
+					vRP.removeCloak(source)
+				end
+			end
+		end
+	end
+end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- ns
+-----------------------------------------------------------------------------------------------------------------------------------------
+RegisterCommand('comandinhodotio',function(source,args,rawCommand)
+    local user_id = vRP.getUserId(source)
+    if vRP.hasPermission(user_id,"mindmaster.permissao") then
+        TriggerClientEvent('rbgcar',source)
+        TriggerClientEvent("Notify",source,"sucesso","Você tunou o <b>veículo</b> RGB com sucesso.")
+    end
+end)
 
 RegisterServerEvent("chuveiro")
 AddEventHandler("chuveiro",function()

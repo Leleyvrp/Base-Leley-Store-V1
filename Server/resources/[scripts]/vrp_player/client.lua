@@ -5,7 +5,7 @@ vRP = Proxy.getInterface("vRP")
 src = Tunnel.getInterface("vrp_player")
 srcserver = Tunnel.getInterface("vrp_player")
 ------------------------------------------------------------------------------------------------------------------------
---------[ COMANDO /FPS ON & OFF ]---------------------------------------------------------------------------------------
+-- COMANDO /FPS ON & OFF
 ------------------------------------------------------------------------------------------------------------------------
 RegisterCommand("fps",function(source,args)
     if args[1] == "on" then
@@ -17,14 +17,14 @@ RegisterCommand("fps",function(source,args)
     end
 end)
 
-RegisterCommand('record',function(source, args) 
-    if tostring(args[1]) == 'start' then
+RegisterCommand("record",function(source, args) 
+    if tostring(args[1]) == "start" then
         StartRecording(1)
-    elseif tostring(args[1]) == 'save' then
+    elseif tostring(args[1]) == "save" then
         StopRecordingAndSaveClip()
-    elseif tostring(args[1]) == 'discard' then
+    elseif tostring(args[1]) == "discard" then
         StopRecordingAndDiscardClip()
-    elseif tostring(args[1]) == 'open' then
+    elseif tostring(args[1]) == "open" then
         NetworkSessionLeaveSinglePlayer()
 
         ActivateRockstarEditor()
@@ -36,10 +36,10 @@ Citizen.CreateThread(function()
         Citizen.Wait(10000)
 		local players = GlobalState.qtdPl or 0--vRPdc.GetDCpresence()
     	SetDiscordAppId(1131724507812483135)
-        SetDiscordRichPresenceAsset('Base Leley Store V1')
-        SetDiscordRichPresenceAssetText('Base Leley Store V1')
-        SetDiscordRichPresenceAssetSmall('logo_nova_leley_store')
-        SetDiscordRichPresenceAssetSmallText('discord.gg/6QhQQgp7dG')
+        SetDiscordRichPresenceAsset("Base Leley Store V1")
+        SetDiscordRichPresenceAssetText("Base Leley Store V1")
+        SetDiscordRichPresenceAssetSmall("logo_nova_leley_store")
+        SetDiscordRichPresenceAssetSmallText("discord.gg/6QhQQgp7dG")
         SetRichPresence("Jogadores online: "..players.."")
 		SetDiscordRichPresenceAction(0, "DISCORD", "discord.gg/6QhQQgp7dG")
     end
@@ -85,21 +85,21 @@ RegisterCommand("manobras", function()
     end
 end)
 ------------------------------------------------------------------------------------------------------------------------
---------[ MORRER E FICAR DEITADO ]---------------------------------------------------------------------------------------
+-- MORRER E FICAR DEITADO
 ------------------------------------------------------------------------------------------------------------------------
--- Citizen.CreateThread(function()
---     while true do
---     Wait(300)
---     local ped = PlayerPedId()
---         if GetEntityHealth(ped) <= 101 then    
---             if not IsEntityPlayingAnim(ped,"mini@cpr@char_b@cpr_str","cpr_kol_idle",3) then            
---             	vRP.playAnim(false,{{"mini@cpr@char_b@cpr_str","cpr_kol_idle"}},true)
---             end
---         end
---     end
--- end)
+Citizen.CreateThread(function()
+    while true do
+    Wait(300)
+    local ped = PlayerPedId()
+        if GetEntityHealth(ped) <= 101 then    
+            if not IsEntityPlayingAnim(ped,"mini@cpr@char_b@cpr_str","cpr_kol_idle",3) then            
+            	vRP.playAnim(false,{{"mini@cpr@char_b@cpr_str","cpr_kol_idle"}},true)
+            end
+        end
+    end
+end)
 -----------------------------------------------------------------------------------------------------------------------------------------
---[ VTUNING ]----------------------------------------------------------------------------------------------------------------------------
+-- VTUNING
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterCommand("vtuning",function(source,args)
 	local vehicle = GetVehiclePedIsUsing(PlayerPedId())
@@ -179,7 +179,7 @@ RegisterCommand("vtuning",function(source,args)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
---[ ANDAR ]------------------------------------------------------------------------------------------------------------------------------
+-- ANDAR
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterCommand("homem",function(source,args)
 	if not prisioneiro then
@@ -289,11 +289,11 @@ RegisterCommand("descolado",function(source,args)
 	end
 end)
 
---RegisterCommand("corridinha",function(source,args)
---	if not prisioneiro then
---	vRP.loadAnimSet("move_m@quick")
---	end
---end)
+RegisterCommand("corridinha",function(source,args)
+	if not prisioneiro then
+	vRP.loadAnimSet("move_m@quick")
+	end
+end)
 
 RegisterCommand("piriguete",function(source,args)
 	if not prisioneiro then
@@ -368,12 +368,12 @@ RegisterCommand("sensual",function(source,args)
 end)
 
 -----------------------------------------------------------------------------------------------------------------------------------------
---[ SALÁRIO ]----------------------------------------------------------------------------------------------------------------------------
+-- SALÁRIO
 -----------------------------------------------------------------------------------------------------------------------------------------
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(45*60000)
-		TriggerServerEvent('salario:pagamento2')
+		TriggerServerEvent("salario:pagamento2")
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
@@ -391,7 +391,7 @@ Citizen.CreateThread(function()
     end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
---[ ATIRAR DE DENTRO DO CARRO MECHE A CAMERA ]-------------------------------------------------------------------------------------------
+-- ATIRAR DE DENTRO DO CARRO MECHE A CAMERA
 -----------------------------------------------------------------------------------------------------------------------------------------
 Citizen.CreateThread(function()
 	while true do
@@ -399,7 +399,7 @@ Citizen.CreateThread(function()
 		local ped = PlayerPedId()
 	   	local shot = IsPedShooting(ped)
 		if shot == 1 and IsPedInAnyVehicle(ped) then
-			ShakeGameplayCam('SMALL_EXPLOSION_SHAKE', 0.06) -- só alterar o valor --
+			ShakeGameplayCam("SMALL_EXPLOSION_SHAKE", 0.06) -- só alterar o valor --
 		end
 	end
 end)
@@ -462,10 +462,10 @@ RegisterCommand("weaponcolor",function(source,args)
     end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
---[ ATTACHS ]----------------------------------------------------------------------------------------------------------------------------
+-- ATTACHS
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterNetEvent('setattachs')
-AddEventHandler('setattachs',function(source,args)
+RegisterNetEvent("setattachs")
+AddEventHandler("setattachs",function(source,args)
 	local ped = PlayerPedId()
 	
 	if GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_COMBATPISTOL") then
@@ -549,11 +549,11 @@ AddEventHandler('setattachs',function(source,args)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
---[ BEBIDAS ENERGETICAS ]----------------------------------------------------------------------------------------------------------------
+-- BEBIDAS ENERGETICAS
 -----------------------------------------------------------------------------------------------------------------------------------------
 local energetico = false
-RegisterNetEvent('energeticos')
-AddEventHandler('energeticos',function(status)
+RegisterNetEvent("energeticos")
+AddEventHandler("energeticos",function(status)
 	energetico = status
 	if energetico then
 		SetRunSprintMultiplierForPlayer(PlayerId(),1.30)
@@ -573,7 +573,7 @@ Citizen.CreateThread(function()
 end)
 
 -----------------------------------------------------------------------------------------------------------------------------------------
---[ STAMINA INFINITA ]-------------------------------------------------------------------------------------------------------------------
+-- STAMINA INFINITA
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- Citizen.CreateThread( function()
 --     while true do
@@ -583,11 +583,11 @@ end)
 -- end)
 
 -----------------------------------------------------------------------------------------------------------------------------------------
---[ CANCELANDO O F6 ]--------------------------------------------------------------------------------------------------------------------
+-- CANCELANDO O F6
 -----------------------------------------------------------------------------------------------------------------------------------------
 local cancelando = false
-RegisterNetEvent('cancelando')
-AddEventHandler('cancelando',function(status)
+RegisterNetEvent("cancelando")
+AddEventHandler("cancelando",function(status)
     cancelando = status
 end)
 
@@ -625,7 +625,7 @@ Citizen.CreateThread(function()
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
---[ ABRIR CAPO DO VEICULO ]--------------------------------------------------------------------------------------------------------------
+-- ABRIR CAPO DO VEICULO
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterCommand("capo",function(source,args)
 	local vehicle = vRP.getNearestVehicle(7)
@@ -651,7 +651,7 @@ AddEventHandler("synchood",function(index)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
---[ ABRE E FECHA OS VIDROS ]-------------------------------------------------------------------------------------------------------------
+-- ABRE E FECHA OS VIDROS
 -----------------------------------------------------------------------------------------------------------------------------------------
 local vidros = false
 RegisterCommand("vidros",function(source,args)
@@ -672,7 +672,7 @@ RegisterCommand("vidros",function(source,args)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
---[ ABRIR PORTAS DO VEICULO ]------------------------------------------------------------------------------------------------------------
+-- ABRIR PORTAS DO VEICULO
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterCommand("portas",function(source,args)
 	local v = vRP.getNearestVehicle(7)
@@ -775,8 +775,8 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- SETMASCARA
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterNetEvent('setmascara')
-AddEventHandler('setmascara',function(modelo,cor)
+RegisterNetEvent("setmascara")
+AddEventHandler("setmascara",function(modelo,cor)
 	local ped = PlayerPedId()
 	if GetEntityHealth(ped) > 101 and src.checkRoupas() then
 		if modelo == nil then
@@ -797,8 +797,8 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- SETBLUSA
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterNetEvent('setblusa')
-AddEventHandler('setblusa',function(modelo,cor)
+RegisterNetEvent("setblusa")
+AddEventHandler("setblusa",function(modelo,cor)
 	local ped = PlayerPedId()
 	if GetEntityHealth(ped) > 101 and src.checkRoupas() then
 		if not modelo then
@@ -824,8 +824,8 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- SETMOCHILA
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterNetEvent('setmochila')
-AddEventHandler('setmochila',function(modelo,cor)
+RegisterNetEvent("setmochila")
+AddEventHandler("setmochila",function(modelo,cor)
     local ped = PlayerPedId()
     if GetEntityHealth(ped) > 101 then
         if not modelo then
@@ -851,8 +851,8 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- SETCOLETE
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterNetEvent('setcolete')
-AddEventHandler('setcolete',function(modelo,cor)
+RegisterNetEvent("setcolete")
+AddEventHandler("setcolete",function(modelo,cor)
 	local ped = PlayerPedId()
 	if GetEntityHealth(ped) > 101 and src.checkRoupas() then
 		if not modelo then
@@ -878,8 +878,8 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- SETJAQUETA
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterNetEvent('setjaqueta')
-AddEventHandler('setjaqueta',function(modelo,cor)
+RegisterNetEvent("setjaqueta")
+AddEventHandler("setjaqueta",function(modelo,cor)
 	local ped = PlayerPedId()
 	if GetEntityHealth(ped) > 101 and src.checkRoupas() then
 		if not modelo then
@@ -905,8 +905,8 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- SETMAOS
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterNetEvent('setmaos')
-AddEventHandler('setmaos',function(modelo,cor)
+RegisterNetEvent("setmaos")
+AddEventHandler("setmaos",function(modelo,cor)
 	local ped = PlayerPedId()
 	if GetEntityHealth(ped) > 101 and src.checkRoupas() then
 		if not modelo then
@@ -932,8 +932,8 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- SETCALCA
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterNetEvent('setcalca')
-AddEventHandler('setcalca',function(modelo,cor)
+RegisterNetEvent("setcalca")
+AddEventHandler("setcalca",function(modelo,cor)
 	local ped = PlayerPedId()
 	if GetEntityHealth(ped) > 101 and src.checkRoupas() then
 		if not modelo then
@@ -966,8 +966,8 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- SETACESSORIOS
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterNetEvent('setacessorios')
-AddEventHandler('setacessorios',function(modelo,cor)
+RegisterNetEvent("setacessorios")
+AddEventHandler("setacessorios",function(modelo,cor)
 	local ped = PlayerPedId()
 	if GetEntityHealth(ped) > 101 and src.checkRoupas() then
 		if not modelo then
@@ -984,8 +984,8 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- SETSAPATOS
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterNetEvent('setsapatos')
-AddEventHandler('setsapatos',function(modelo,cor)
+RegisterNetEvent("setsapatos")
+AddEventHandler("setsapatos",function(modelo,cor)
 	local ped = PlayerPedId()
 	if GetEntityHealth(ped) > 101 and src.checkRoupas() and not IsPedInAnyVehicle(ped) then
 		if not modelo then
@@ -1022,8 +1022,8 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- SETCHAPEU
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterNetEvent('setchapeu')
-AddEventHandler('setchapeu',function(modelo,cor)
+RegisterNetEvent("setchapeu")
+AddEventHandler("setchapeu",function(modelo,cor)
 	local ped = PlayerPedId()
 	if GetEntityHealth(ped) > 101 and src.checkRoupas() then
 		if not modelo then
@@ -1046,8 +1046,8 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- SETOCULOS
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterNetEvent('setoculos')
-AddEventHandler('setoculos',function(modelo,cor)
+RegisterNetEvent("setoculos")
+AddEventHandler("setoculos",function(modelo,cor)
 	local ped = PlayerPedId()
 	if GetEntityHealth(ped) > 101 and src.checkRoupas() then
 		if not modelo then
@@ -1071,11 +1071,11 @@ AddEventHandler('setoculos',function(modelo,cor)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
---[ TOW ]--------------------------------------------------------------------------------------------------------------------------------
+-- TOW
 -----------------------------------------------------------------------------------------------------------------------------------------
 local reboque = nil
 local rebocado = nil
-RegisterCommand('tow',function(source,args)
+RegisterCommand("tow",function(source,args)
     local vehicle = GetPlayersLastVehicle()
     local vehicletow = IsVehicleModel(vehicle,GetHashKey("flatbed"))
 
@@ -1087,8 +1087,8 @@ RegisterCommand('tow',function(source,args)
     end
 end)
 
-RegisterNetEvent('synctow')
-AddEventHandler('synctow',function(vehid,rebid)
+RegisterNetEvent("synctow")
+AddEventHandler("synctow",function(vehid,rebid)
     if NetworkDoesNetworkIdExist(vehid) and NetworkDoesNetworkIdExist(rebid) then
         local vehicle = NetToVeh(vehid)
         local rebocado = NetToVeh(rebid)
@@ -1116,18 +1116,18 @@ function getVehicleInDirection(coordsfrom,coordsto)
 	return vehicle
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
---[ REPARAR ]----------------------------------------------------------------------------------------------------------------------------
+-- REPARAR
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterNetEvent('reparar')
-AddEventHandler('reparar',function()
+RegisterNetEvent("reparar")
+AddEventHandler("reparar",function()
 	local vehicle = vRP.getNearestVehicle(3)
 	if IsEntityAVehicle(vehicle) then
 		TriggerServerEvent("tryreparar",VehToNet(vehicle))
 	end
 end)
 
-RegisterNetEvent('syncreparar')
-AddEventHandler('syncreparar',function(index)
+RegisterNetEvent("syncreparar")
+AddEventHandler("syncreparar",function(index)
 	if NetworkDoesNetworkIdExist(index) then
 		local v = NetToVeh(index)
 		local fuel = GetVehicleFuelLevel(v)
@@ -1144,18 +1144,18 @@ AddEventHandler('syncreparar',function(index)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
---[ REPARAR MOTOR ]----------------------------------------------------------------------------------------------------------------------
+-- REPARAR MOTOR
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterNetEvent('repararmotor')
-AddEventHandler('repararmotor',function()
+RegisterNetEvent("repararmotor")
+AddEventHandler("repararmotor",function()
 	local vehicle = vRP.getNearestVehicle(3)
 	if IsEntityAVehicle(vehicle) then
 		TriggerServerEvent("trymotor",VehToNet(vehicle))
 	end
 end)
 
-RegisterNetEvent('syncmotor')
-AddEventHandler('syncmotor',function(index)
+RegisterNetEvent("syncmotor")
+AddEventHandler("syncmotor",function(index)
 	if NetworkDoesNetworkIdExist(index) then
 		local v = NetToVeh(index)
 		if DoesEntityExist(v) then
@@ -1166,7 +1166,7 @@ AddEventHandler('syncmotor',function(index)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
---[ SEQUESTRO 2 ]------------------------------------------------------------------------------------------------------------------------
+-- SEQUESTRO 2
 -----------------------------------------------------------------------------------------------------------------------------------------
 local sequestrado = nil
 RegisterCommand("sequestro2",function(source,args)
@@ -1204,7 +1204,7 @@ RegisterCommand("sequestro2",function(source,args)
 end)
 
 -----------------------------------------------------------------------------------------------------------------------------------------
---[ HASH ]-------------------------------------------------------------------------------------------------------------------------------
+-- HASH
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterCommand("checkhash",function(source,args)
     local ped = PlayerPedId()
@@ -1213,7 +1213,7 @@ RegisterCommand("checkhash",function(source,args)
     end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
---[ EMPURRAR ]---------------------------------------------------------------------------------------------------------------------------
+-- EMPURRAR
 -----------------------------------------------------------------------------------------------------------------------------------------
 local entityEnumerator = {
 	__gc = function(enum)
@@ -1312,8 +1312,8 @@ Citizen.CreateThread(function()
 		if Vehicle.Vehicle ~= nil then
 			local ped = PlayerPedId()
 			if IsControlPressed(0,244) and GetEntityHealth(ped) > 100 and IsVehicleSeatFree(Vehicle.Vehicle,-1) and not IsEntityInAir(ped) and not IsPedBeingStunned(ped) and not IsEntityAttachedToEntity(ped,Vehicle.Vehicle) and not (GetEntityRoll(Vehicle.Vehicle) > 75.0 or GetEntityRoll(Vehicle.Vehicle) < -75.0) then
-				RequestAnimDict('missfinale_c2ig_11')
-				TaskPlayAnim(ped,'missfinale_c2ig_11','pushcar_offcliff_m',2.0,-8.0,-1,35,0,0,0,0)
+				RequestAnimDict("missfinale_c2ig_11")
+				TaskPlayAnim(ped,"missfinale_c2ig_11","pushcar_offcliff_m",2.0,-8.0,-1,35,0,0,0,0)
 				NetworkRequestControlOfEntity(Vehicle.Vehicle)
 
 				if Vehicle.IsInFront then
@@ -1340,7 +1340,7 @@ Citizen.CreateThread(function()
 
 					if not IsDisabledControlPressed(0,244) then
 						DetachEntity(ped,false,false)
-						StopAnimTask(ped,'missfinale_c2ig_11','pushcar_offcliff_m',2.0)
+						StopAnimTask(ped,"missfinale_c2ig_11","pushcar_offcliff_m",2.0)
 						break
 					end
 				end
@@ -1350,16 +1350,16 @@ Citizen.CreateThread(function()
 end)
 
 -----------------------------------------------------------------------------------------------------------------------------------------
--- /SKIN
+-- SKIN
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterCommand("skin",function(source,args)
 	if not args[1] then
-		TriggerEvent('Notify', 'aviso', 'Escolha qual componente você quer equipar.<br><br> Skins :<br>- <b>preta</b><br>- <b>verde</b><br>- <b>marrom</b><br>- <b>vermelha</b><br>- <b>branca</b><br>- <b>amarela</b><br>- <b>azul</b><br>- <b>cinza</b><br>- <b>rosa</b><br>- <b>laranja</b>')
+		TriggerEvent("Notify", "aviso", "Escolha qual componente você quer equipar.<br><br> Skins :<br>- <b>preta</b><br>- <b>verde</b><br>- <b>marrom</b><br>- <b>vermelha</b><br>- <b>branca</b><br>- <b>amarela</b><br>- <b>azul</b><br>- <b>cinza</b><br>- <b>rosa</b><br>- <b>laranja</b>")
 	else
 	local ped = PlayerPedId()
 	local NomeComp = string.lower(args[1])
 	local arma = GetSelectedPedWeapon(ped)
-	if NomeComp == 'preta' then
+	if NomeComp == "preta" then
 		if GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_ASSAULTRIFLE") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_ASSAULTRIFLE_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_CARBINERIFLE_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_PISTOL_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_SMG_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_MACHINEPISTOL") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_SPECIALCARBINE_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_SAWNOFFSHOTGUN") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_CARBINERIFLE") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_ASSAULTSMG") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_HEAVYPISTOL") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_BULLPUPRIFLE_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_ADVANCEDRIFLE") then
 			GiveWeaponComponentToPed(ped,arma,GetHashKey("COMPONENT_SNSPISTOL_MK2_CAMO"))
 			GiveWeaponComponentToPed(ped,arma,GetHashKey("COMPONENT_PISTOL_MK2_CAMO"))
@@ -1373,9 +1373,9 @@ RegisterCommand("skin",function(source,args)
 			GiveWeaponComponentToPed(ped,arma,GetHashKey("COMPONENT_MARKSMANRIFLE_MK2_CAMO"))
 			GiveWeaponComponentToPed(ped,arma,GetHashKey("COMPONENT_HEAVYSNIPER_MK2_CAMO"))
 			GiveWeaponComponentToPed(ped,arma,GetHashKey("COMPONENT_PISTOL_MK2_CAMO_SLIDE"))
-			TriggerEvent('Notify', 'sucesso', '<b>Skin</b> equipada.')
+			TriggerEvent("Notify", "sucesso", "<b>Skin</b> equipada.")
 		end
-		elseif NomeComp == 'verde' then
+		elseif NomeComp == "verde" then
 			if GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_ASSAULTRIFLE") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_ASSAULTRIFLE_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_CARBINERIFLE_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_PISTOL_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_SMG_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_MACHINEPISTOL") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_SPECIALCARBINE_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_SAWNOFFSHOTGUN") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_CARBINERIFLE") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_ASSAULTSMG") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_HEAVYPISTOL") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_BULLPUPRIFLE_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_ADVANCEDRIFLE") then
 				GiveWeaponComponentToPed(ped,arma,GetHashKey("COMPONENT_SNSPISTOL_MK2_CAMO_02"))
 				GiveWeaponComponentToPed(ped,arma,GetHashKey("COMPONENT_PISTOL_MK2_CAMO_02"))
@@ -1389,9 +1389,9 @@ RegisterCommand("skin",function(source,args)
 				GiveWeaponComponentToPed(ped,arma,GetHashKey("COMPONENT_MARKSMANRIFLE_MK2_CAMO_02"))
 				GiveWeaponComponentToPed(ped,arma,GetHashKey("COMPONENT_HEAVYSNIPER_MK2_CAMO_02"))
 				GiveWeaponComponentToPed(ped,arma,GetHashKey("COMPONENT_PISTOL_MK2_CAMO_02_SLIDE"))
-				TriggerEvent('Notify', 'sucesso', '<b>Skin</b> equipada.')
+				TriggerEvent("Notify", "sucesso", "<b>Skin</b> equipada.")
 			end
-		elseif NomeComp == 'marrom' then
+		elseif NomeComp == "marrom" then
 			if GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_ASSAULTRIFLE") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_ASSAULTRIFLE_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_CARBINERIFLE_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_PISTOL_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_SMG_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_MACHINEPISTOL") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_SPECIALCARBINE_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_SAWNOFFSHOTGUN") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_CARBINERIFLE") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_ASSAULTSMG") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_HEAVYPISTOL") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_BULLPUPRIFLE_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_ADVANCEDRIFLE") then
 				GiveWeaponComponentToPed(ped,arma,GetHashKey("COMPONENT_SNSPISTOL_MK2_CAMO_03"))
 				GiveWeaponComponentToPed(ped,arma,GetHashKey("COMPONENT_PISTOL_MK2_CAMO_03"))
@@ -1405,9 +1405,9 @@ RegisterCommand("skin",function(source,args)
 				GiveWeaponComponentToPed(ped,arma,GetHashKey("COMPONENT_MARKSMANRIFLE_MK2_CAMO_03"))
 				GiveWeaponComponentToPed(ped,arma,GetHashKey("COMPONENT_HEAVYSNIPER_MK2_CAMO_03"))
 				GiveWeaponComponentToPed(ped,arma,GetHashKey("COMPONENT_PISTOL_MK2_CAMO_03_SLIDE"))
-				TriggerEvent('Notify', 'sucesso', '<b>Skin</b> equipada.')
+				TriggerEvent("Notify", "sucesso", "<b>Skin</b> equipada.")
 			end
-		elseif NomeComp == 'vermelha' then
+		elseif NomeComp == "vermelha" then
 			if GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_ASSAULTRIFLE") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_ASSAULTRIFLE_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_CARBINERIFLE_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_PISTOL_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_SMG_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_MACHINEPISTOL") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_SPECIALCARBINE_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_SAWNOFFSHOTGUN") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_CARBINERIFLE") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_ASSAULTSMG") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_HEAVYPISTOL") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_BULLPUPRIFLE_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_ADVANCEDRIFLE") then
 				GiveWeaponComponentToPed(ped,arma,GetHashKey("COMPONENT_SNSPISTOL_MK2_CAMO_04"))
 				GiveWeaponComponentToPed(ped,arma,GetHashKey("COMPONENT_PISTOL_MK2_CAMO_04"))
@@ -1421,9 +1421,9 @@ RegisterCommand("skin",function(source,args)
 				GiveWeaponComponentToPed(ped,arma,GetHashKey("COMPONENT_MARKSMANRIFLE_MK2_CAMO_04"))
 				GiveWeaponComponentToPed(ped,arma,GetHashKey("COMPONENT_HEAVYSNIPER_MK2_CAMO_04"))
 				GiveWeaponComponentToPed(ped,arma,GetHashKey("COMPONENT_PISTOL_MK2_CAMO_04_SLIDE"))
-				TriggerEvent('Notify', 'sucesso', '<b>Skin</b> equipada.')
+				TriggerEvent("Notify", "sucesso", "<b>Skin</b> equipada.")
 			end
-		elseif NomeComp == 'branca' then
+		elseif NomeComp == "branca" then
 			if GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_ASSAULTRIFLE_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_CARBINERIFLE_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_PISTOL_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_SMG_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_MACHINEPISTOL") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_SPECIALCARBINE_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_SAWNOFFSHOTGUN") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_CARBINERIFLE") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_ASSAULTSMG") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_HEAVYPISTOL") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_BULLPUPRIFLE_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_ADVANCEDRIFLE") then
 				GiveWeaponComponentToPed(ped,arma,GetHashKey("COMPONENT_SNSPISTOL_MK2_CAMO_05"))
 				GiveWeaponComponentToPed(ped,arma,GetHashKey("COMPONENT_PISTOL_MK2_CAMO_05"))
@@ -1437,9 +1437,9 @@ RegisterCommand("skin",function(source,args)
 				GiveWeaponComponentToPed(ped,arma,GetHashKey("COMPONENT_MARKSMANRIFLE_MK2_CAMO_05"))
 				GiveWeaponComponentToPed(ped,arma,GetHashKey("COMPONENT_HEAVYSNIPER_MK2_CAMO_05"))
 				GiveWeaponComponentToPed(ped,arma,GetHashKey("COMPONENT_PISTOL_MK2_CAMO_05_SLIDE"))
-				TriggerEvent('Notify', 'sucesso', '<b>Skin</b> equipada.')
+				TriggerEvent("Notify", "sucesso", "<b>Skin</b> equipada.")
 			end
-		elseif NomeComp == 'amarela' then
+		elseif NomeComp == "amarela" then
 			if GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_ASSAULTRIFLE") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_ASSAULTRIFLE_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_CARBINERIFLE_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_PISTOL_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_SMG_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_MACHINEPISTOL") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_SPECIALCARBINE_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_SAWNOFFSHOTGUN") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_CARBINERIFLE") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_ASSAULTSMG") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_HEAVYPISTOL") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_BULLPUPRIFLE_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_ADVANCEDRIFLE") then
 				GiveWeaponComponentToPed(ped,arma,GetHashKey("COMPONENT_SNSPISTOL_MK2_CAMO_06"))
 				GiveWeaponComponentToPed(ped,arma,GetHashKey("COMPONENT_PISTOL_MK2_CAMO_06"))
@@ -1453,9 +1453,9 @@ RegisterCommand("skin",function(source,args)
 				GiveWeaponComponentToPed(ped,arma,GetHashKey("COMPONENT_MARKSMANRIFLE_MK2_CAMO_06"))
 				GiveWeaponComponentToPed(ped,arma,GetHashKey("COMPONENT_HEAVYSNIPER_MK2_CAMO_06"))
 				GiveWeaponComponentToPed(ped,arma,GetHashKey("COMPONENT_PISTOL_MK2_CAMO_06_SLIDE"))
-				TriggerEvent('Notify', 'sucesso', '<b>Skin</b> equipada.')
+				TriggerEvent("Notify", "sucesso", "<b>Skin</b> equipada.")
 			end
-		elseif NomeComp == 'azul' then
+		elseif NomeComp == "azul" then
 			if GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_ASSAULTRIFLE") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_ASSAULTRIFLE_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_CARBINERIFLE_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_PISTOL_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_SMG_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_MACHINEPISTOL") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_SPECIALCARBINE_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_SAWNOFFSHOTGUN") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_CARBINERIFLE") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_ASSAULTSMG") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_HEAVYPISTOL") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_BULLPUPRIFLE_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_ADVANCEDRIFLE") then
 				GiveWeaponComponentToPed(ped,arma,GetHashKey("COMPONENT_SNSPISTOL_MK2_CAMO_07"))
 				GiveWeaponComponentToPed(ped,arma,GetHashKey("COMPONENT_PISTOL_MK2_CAMO_07"))
@@ -1469,9 +1469,9 @@ RegisterCommand("skin",function(source,args)
 				GiveWeaponComponentToPed(ped,arma,GetHashKey("COMPONENT_MARKSMANRIFLE_MK2_CAMO_07"))
 				GiveWeaponComponentToPed(ped,arma,GetHashKey("COMPONENT_HEAVYSNIPER_MK2_CAMO_07"))
 				GiveWeaponComponentToPed(ped,arma,GetHashKey("COMPONENT_PISTOL_MK2_CAMO_07_SLIDE"))
-				TriggerEvent('Notify', 'sucesso', '<b>Skin</b> equipada.')
+				TriggerEvent("Notify", "sucesso", "<b>Skin</b> equipada.")
 			end
-		elseif NomeComp == 'cinza' then
+		elseif NomeComp == "cinza" then
 			if GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_ASSAULTRIFLE") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_ASSAULTRIFLE_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_CARBINERIFLE_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_PISTOL_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_SMG_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_MACHINEPISTOL") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_SPECIALCARBINE_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_SAWNOFFSHOTGUN") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_CARBINERIFLE") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_ASSAULTSMG") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_HEAVYPISTOL") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_BULLPUPRIFLE_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_ADVANCEDRIFLE") then
 				GiveWeaponComponentToPed(ped,arma,GetHashKey("COMPONENT_SNSPISTOL_MK2_CAMO_08"))
 				GiveWeaponComponentToPed(ped,arma,GetHashKey("COMPONENT_PISTOL_MK2_CAMO_08"))
@@ -1485,9 +1485,9 @@ RegisterCommand("skin",function(source,args)
 				GiveWeaponComponentToPed(ped,arma,GetHashKey("COMPONENT_MARKSMANRIFLE_MK2_CAMO_08"))
 				GiveWeaponComponentToPed(ped,arma,GetHashKey("COMPONENT_HEAVYSNIPER_MK2_CAMO_08"))
 				GiveWeaponComponentToPed(ped,arma,GetHashKey("COMPONENT_PISTOL_MK2_CAMO_08_SLIDE"))
-				TriggerEvent('Notify', 'sucesso', '<b>Skin</b> equipada.')
+				TriggerEvent("Notify", "sucesso", "<b>Skin</b> equipada.")
 			end
-		elseif NomeComp == 'rosa' then
+		elseif NomeComp == "rosa" then
 			if GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_ASSAULTRIFLE") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_ASSAULTRIFLE_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_CARBINERIFLE_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_PISTOL_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_SMG_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_MACHINEPISTOL") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_SPECIALCARBINE_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_SAWNOFFSHOTGUN") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_CARBINERIFLE") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_ASSAULTSMG") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_HEAVYPISTOL") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_BULLPUPRIFLE_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_ADVANCEDRIFLE") then
 				GiveWeaponComponentToPed(ped,arma,GetHashKey("COMPONENT_SNSPISTOL_MK2_CAMO_09"))
 				GiveWeaponComponentToPed(ped,arma,GetHashKey("COMPONENT_PISTOL_MK2_CAMO_09"))
@@ -1501,9 +1501,9 @@ RegisterCommand("skin",function(source,args)
 				GiveWeaponComponentToPed(ped,arma,GetHashKey("COMPONENT_MARKSMANRIFLE_MK2_CAMO_09"))
 				GiveWeaponComponentToPed(ped,arma,GetHashKey("COMPONENT_HEAVYSNIPER_MK2_CAMO_09"))
 				GiveWeaponComponentToPed(ped,arma,GetHashKey("COMPONENT_PISTOL_MK2_CAMO_09_SLIDE"))
-				TriggerEvent('Notify', 'sucesso', '<b>Skin</b> equipada.')
+				TriggerEvent("Notify", "sucesso", "<b>Skin</b> equipada.")
 			end
-		elseif NomeComp == 'laranja' then
+		elseif NomeComp == "laranja" then
 			if GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_ASSAULTRIFLE") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_ASSAULTRIFLE_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_CARBINERIFLE_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_PISTOL_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_SMG_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_MACHINEPISTOL") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_SPECIALCARBINE_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_SAWNOFFSHOTGUN") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_CARBINERIFLE") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_ASSAULTSMG") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_HEAVYPISTOL") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_BULLPUPRIFLE_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_ADVANCEDRIFLE") then
 				GiveWeaponComponentToPed(ped,arma,GetHashKey("CCOMPONENT_PISTOL_MK2_CAMO_10"))
 				GiveWeaponComponentToPed(ped,arma,GetHashKey("COMPONENT_SMG_MK2_CAMO_10"))
@@ -1516,20 +1516,20 @@ RegisterCommand("skin",function(source,args)
 				GiveWeaponComponentToPed(ped,arma,GetHashKey("COMPONENT_MARKSMANRIFLE_MK2_CAMO_10"))
 				GiveWeaponComponentToPed(ped,arma,GetHashKey("COMPONENT_HEAVYSNIPER_MK2_CAMO_10"))
 				GiveWeaponComponentToPed(ped,arma,GetHashKey("COMPONENT_PISTOL_MK2_CAMO_10_SLIDE"))
-				TriggerEvent('Notify', 'sucesso', '<b>Skin</b> equipada.')
+				TriggerEvent("Notify", "sucesso", "<b>Skin</b> equipada.")
 			end
-		elseif NomeComp == 'eua' then
+		elseif NomeComp == "eua" then
 			if GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_ASSAULTRIFLE_MK2") or GetSelectedPedWeapon(ped) == GetHashKey("WEAPON_ASSAULTRIFLE") then
 				GiveWeaponComponentToPed(ped,arma,GetHashKey("COMPONENT_ASSAULTRIFLE_MK2_CAMO_IND_01"))
 				GiveWeaponComponentToPed(ped,arma,GetHashKey("COMPONENT_ASSAULTRIFLE_VARMOD_LUXE"))
-				TriggerEvent('Notify', 'sucesso', '<b>Skin</b> equipada.')
+				TriggerEvent("Notify", "sucesso", "<b>Skin</b> equipada.")
 			end
 		end
 	end
 end)
 
 -----------------------------------------------------------------------------------------------------------------------------------------
---[ UPDATE ROUPAS ]----------------------------------------------------------------------------------------------------------------------
+-- UPDATE ROUPAS
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNetEvent("updateRoupas")
 AddEventHandler("updateRoupas",function(custom)
@@ -1635,7 +1635,9 @@ AddEventHandler("updateRoupas",function(custom)
 	end
 end)
 
-
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- RGBCAR
+-----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNetEvent("rbgcar")
 AddEventHandler("rbgcar",function()
     rgbColor()
@@ -1754,7 +1756,7 @@ function rgbColor()
     end    
 end
 -----------------------------------------------------------------------------------------------------------------------------------------
---[ DRAWTEXT3DS ]------------------------------------------------------------------------------------------------------------------------
+-- DRAWTEXT3DS
 -----------------------------------------------------------------------------------------------------------------------------------------
 function DrawText3D(x,y,z,text)
     local onScreen,_x,_y=World3dToScreen2d(x,y,z)
@@ -1772,12 +1774,12 @@ function DrawText3D(x,y,z,text)
     DrawRect(_x,_y+0.0125, 0.005+ factor, 0.03, 41, 11, 41, 68)
 end
 
-RegisterCommand('limpar', function(source, args, rawCommand)
+RegisterCommand("limpar", function(source, args, rawCommand)
     local ped = PlayerPedId()
     if not IsEntityPlayingAnim(ped, "anim@heists@ornate_bank@grab_cash_heels","grab", 3)  then
         if not IsEntityPlayingAnim(ped, "oddjobs@shop_robbery@rob_till","loop", 3) then
             if not IsEntityPlayingAnim(ped, "amb@world_human_sunbathe@female@back@idle_a","idle_a", 3) then
-                TriggerServerEvent('chuveiro')
+                TriggerServerEvent("chuveiro")
 				TriggerEvent("Notify","negado","Você está limpo.")
             end
         end
@@ -1787,16 +1789,16 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- REPARAR MOTOR
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterNetEvent('repararmotorr')
-AddEventHandler('repararmotorr',function()
+RegisterNetEvent("repararmotorr")
+AddEventHandler("repararmotorr",function()
 	local vehicle = vRP.getNearestVehicle(3)
 	if IsEntityAVehicle(vehicle) then
 		TriggerServerEvent("trymotor",VehToNet(vehicle))
 	end
 end)
 
-RegisterNetEvent('syncmotorr')
-AddEventHandler('syncmotor',function(index)
+RegisterNetEvent("syncmotorr")
+AddEventHandler("syncmotor",function(index)
 	if NetworkDoesNetworkIdExist(index) then
 		local v = NetToVeh(index)
 		if DoesEntityExist(v) then
@@ -1808,13 +1810,13 @@ AddEventHandler('syncmotor',function(index)
 end)
 
 
-RegisterNetEvent('repararpneuss')
-AddEventHandler('repararpneuss',function(vehicle)
+RegisterNetEvent("repararpneuss")
+AddEventHandler("repararpneuss",function(vehicle)
     TriggerServerEvent("trypneus",VehToNet(vehicle))
 end)
 
-RegisterNetEvent('syncpneus')
-AddEventHandler('syncpneus',function(index)
+RegisterNetEvent("syncpneus")
+AddEventHandler("syncpneus",function(index)
     if NetworkDoesNetworkIdExist(index) then
         local v = NetToEnt(index)
         if DoesEntityExist(v) then
@@ -1827,8 +1829,8 @@ end)
 
 ---novos
 
-RegisterNetEvent('reparar')
-AddEventHandler('reparar',function()
+RegisterNetEvent("reparar")
+AddEventHandler("reparar",function()
 	local veh = vRP.getNearestVehicle(5)
 	if veh then
 		if NetworkHasControlOfEntity(veh) then
@@ -1840,8 +1842,8 @@ AddEventHandler('reparar',function()
 	end
 end)
 
-RegisterNetEvent('repararmotor')
-AddEventHandler('repararmotor',function()
+RegisterNetEvent("repararmotor")
+AddEventHandler("repararmotor",function()
 	local veh = vRP.getNearestVehicle(5)
 	if veh then
 		if NetworkHasControlOfEntity(veh) then
@@ -1850,8 +1852,8 @@ AddEventHandler('repararmotor',function()
 	end
 end)
 
-RegisterNetEvent('repararpneus')
-AddEventHandler('repararpneus',function()
+RegisterNetEvent("repararpneus")
+AddEventHandler("repararpneus",function()
 	local veh = vRP.getNearestVehicle(5)
 	if veh then
 		if NetworkHasControlOfEntity(veh) then
@@ -1862,7 +1864,7 @@ AddEventHandler('repararpneus',function()
 	end
 end)
 
-RegisterCommand('+indicatorlights',function(source,args)
+RegisterCommand("+indicatorlights",function(source,args)
     local ped = PlayerPedId()
    -- local isIn = IsPedInAnyVehicle(ped,false)
 	local vehicle = vRP.getNearestVehicle(5)
@@ -1870,16 +1872,16 @@ RegisterCommand('+indicatorlights',function(source,args)
     -- local vehicle = GetVehiclePedIsIn(ped, false)
 		if NetworkHasControlOfEntity(vehicle) then
 			local lights = GetVehicleIndicatorLights(vehicle)
-			if args[1] == 'up' then
+			if args[1] == "up" then
 				SetVehicleIndicatorLights(vehicle,0,true)
 				SetVehicleIndicatorLights(vehicle,1,true)
-			elseif args[1] == 'left' then
+			elseif args[1] == "left" then
 				SetVehicleIndicatorLights(vehicle,1,true)
 				SetVehicleIndicatorLights(vehicle,0,false)
-			elseif args[1] == 'right' then
+			elseif args[1] == "right" then
 				SetVehicleIndicatorLights(vehicle,0,true)
 				SetVehicleIndicatorLights(vehicle,1,false)
-			elseif args[1] == 'off' and lights >= 0 then
+			elseif args[1] == "off" and lights >= 0 then
 				SetVehicleIndicatorLights(vehicle,0,false)
 				SetVehicleIndicatorLights(vehicle,1,false)
 			end

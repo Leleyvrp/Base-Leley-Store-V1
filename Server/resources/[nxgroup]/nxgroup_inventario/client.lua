@@ -1,21 +1,29 @@
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- VRP
+-----------------------------------------------------------------------------------------------------------------------------------------
 local Tunnel = module("vrp","lib/Tunnel")
 local Proxy = module("vrp","lib/Proxy")
-
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- CONECT
+-----------------------------------------------------------------------------------------------------------------------------------------
 vRP = Proxy.getInterface("vRP")
 vRPNserver = Tunnel.getInterface("nxgroup_inventario")
-
 func = {}
 Proxy.addInterface("nxgroup_inventario",func)
 Tunnel.bindInterface("nxgroup_inventario",func)
 local config = module("nxgroup_inventario", "config")
---[ VARIÁVEIS ]--------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- VARIAVEL
+-----------------------------------------------------------------------------------------------------------------------------------------
 local trunkinvOpen = false
 local invOpen = false
 local chestOpen = nil
 local chestTimer = 0
 local roubando = nil
 local sendoRoubado = false
-
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- INVCLOSE
+-----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNUICallback("invClose",function(data)
 	invOpen = false
 	if chestOpen then
@@ -28,7 +36,9 @@ RegisterNUICallback("invClose",function(data)
 	SendNUIMessage({ action = "hideMenu" })
 	StopScreenEffect("MenuMGSelectionIn")
 end)
-
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- INVCLOSE2
+-----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNUICallback("invClose2",function(data)
 	invOpen = false
 	if chestOpen then
@@ -44,8 +54,9 @@ RegisterNUICallback("invClose2",function(data)
 	SendNUIMessage({ action = "hideMenu" })
 	StopScreenEffect("MenuMGSelectionIn")
 end)
- 
--- FUNÇÃO PARA FECHAR O INV SE CAIR A NET -----------------
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- FECHAR INV SE A SET CAIR
+-----------------------------------------------------------------------------------------------------------------------------------------
 AddEventHandler("core_connection:close",function(data)
 	invOpen = false
 	if chestOpen then
@@ -60,9 +71,9 @@ AddEventHandler("core_connection:close",function(data)
 	SendNUIMessage({ action = "hideMenu" })
 	StopScreenEffect("MenuMGSelectionIn")
 end)
------------------------------------------------------------------------
---[ ABRIR INVENTARIO ]-------------------------------------------------
------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- ABIRI INV
+-----------------------------------------------------------------------------------------------------------------------------------------
 RegisterKeyMapping("moc","Abrir a mochila","keyboard","OEM_3")
 local cdmoc = GetGameTimer()
 RegisterCommand("moc",function()
@@ -85,7 +96,9 @@ RegisterCommand("moc",function()
       end
     end
 end)
-
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- ABRIR BAU CAR
+-----------------------------------------------------------------------------------------------------------------------------------------
 RegisterKeyMapping("bautr","Abrir o bau carro","keyboard","PAGEUP")
 local cdbau = GetGameTimer()
 RegisterCommand("bautr",function()
@@ -101,7 +114,9 @@ RegisterCommand("bautr",function()
 		TriggerEvent("nyo_notify", "#FFA500","Importante", "Você nâo pode abrir do porta mala muito rapido", 5000)
 	end
 end)
-
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- NS
+-----------------------------------------------------------------------------------------------------------------------------------------
 -- Citizen.CreateThread(function(source)
 -- 	local source = source
 --     while true do
@@ -126,7 +141,9 @@ end)
 -- 		end
 --     end
 -- end)
-
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- requestMochila
+-----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNUICallback("requestMochila",function(data,cb)
 	local ped = PlayerPedId()
 	local x,y,z = table.unpack(GetEntityCoords(ped))
@@ -136,15 +153,17 @@ RegisterNUICallback("requestMochila",function(data,cb)
 		cb({ inventario = inventario, drop = dropItems,peso = peso, maxpeso = maxpeso, b1 = b1, b2 = b2, b3 = b3, b4 = b4, weapons = weapons,images = config.images})
 	end
 end)
-
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- requestIdentity
+-----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNUICallback("requestIdentity",function(data,cb)
 	local ped = PlayerPedId()
 	local identity = vRPNserver.getIdentity()
 	cb({infos = identity})
 end)
-
-
-
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- BIND1
+-----------------------------------------------------------------------------------------------------------------------------------------
 local ub = GetGameTimer()
 RegisterKeyMapping("bind1","Bind 1","keyboard","1")
 RegisterCommand("bind1",function()
@@ -155,6 +174,9 @@ RegisterCommand("bind1",function()
 		TriggerEvent("nyo_notify", "#FFA500","Importante", "Você nâo pode usar as bind muito rapido", 5000)
   end
 end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- BIND2
+-----------------------------------------------------------------------------------------------------------------------------------------
 
 local ub2 = GetGameTimer()
 RegisterKeyMapping("bind2","Bind 2","keyboard","2")
@@ -166,7 +188,9 @@ RegisterCommand("bind2",function()
 		TriggerEvent("nyo_notify", "#FFA500","Importante", "Você nâo pode usar as bind muito rapido", 5000)
   end
 end)
-
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- BIND3
+-----------------------------------------------------------------------------------------------------------------------------------------
 local ub3 = GetGameTimer()
 RegisterKeyMapping("bind3","Bind 3","keyboard","3")
 RegisterCommand("bind3",function()
@@ -177,7 +201,9 @@ RegisterCommand("bind3",function()
 		TriggerEvent("nyo_notify", "#FFA500","Importante", "Você nâo pode usar as bind muito rapido", 5000)
   end
 end)
-
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- BIND4
+-----------------------------------------------------------------------------------------------------------------------------------------
 local ub4 = GetGameTimer()
 RegisterKeyMapping("bind4","Bind 4","keyboard","4")
 RegisterCommand("bind4",function()
@@ -188,18 +214,22 @@ RegisterCommand("bind4",function()
 		TriggerEvent("nyo_notify", "#FFA500","Importante", "Você nâo pode usar as bind muito rapido", 5000)
   end
 end)
-
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- BIND ITEM
+-----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNUICallback("bindItem",function(data)
 	vRPNserver.tryBind(data)
 end)
-
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- BIND EQUIP
+-----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNUICallback("unEquip",function(data)
 	vRPNserver.unEquip(data)
 	SendNUIMessage({ action = "updateMochila" })
 end)
 
 -----------------------------------------------------------------------------------------------------------------------------------------
--- BAU DE FACS --------------------------------------------------------------------------------------------------------------------------
+-- BAU DE FACS
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNUICallback("requestChest",function(data,cb)
 	local inventario,inventario2,peso,maxpeso,peso2,maxpeso2 = vRPNserver.openChest(tostring(chestOpen))
@@ -207,15 +237,21 @@ RegisterNUICallback("requestChest",function(data,cb)
 		cb({ inventario = inventario, inventario2 = inventario2, peso = peso, maxpeso = maxpeso, peso2 = peso2, maxpeso2 = maxpeso2, infos = infos})
 	end
 end)
-
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- TAKEITEM
+-----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNUICallback("takeItem",function(data)
 	vRPNserver.takeItem(tostring(chestOpen),data.item,data.amount)
 end)
-
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- SOREITEM
+-----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNUICallback("storeItem",function(data)
 	vRPNserver.storeItem(tostring(chestOpen),data.item,data.amount)
 end)
-
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- NS 2
+-----------------------------------------------------------------------------------------------------------------------------------------
 local chest = config.chest
 Citizen.CreateThread(function()
 	while true do
@@ -241,7 +277,9 @@ Citizen.CreateThread(function()
 		Citizen.Wait(egsleep)
 	end
 end)
-
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- NS 3
+-----------------------------------------------------------------------------------------------------------------------------------------
 local chestPeso = 100
 function func.openHouseChest(chest,weight)
 	if vRPNserver.chestInUse(chest) then
@@ -253,24 +291,29 @@ function func.openHouseChest(chest,weight)
 		SendNUIMessage({ action = "updateHomeChest" })
 	end
 end
-
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- requestHomeChest
+-----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNUICallback("requestHomeChest",function(data,cb)
 	local inventario,inventario2,peso,maxpeso = vRPNserver.openHomeChest(tostring(chestOpen),chestPeso)
 	if inventario then
 		cb({ inventario = inventario, inventario2 = inventario2, peso = peso, maxpeso = maxpeso, maxpeso2 = chestPeso, infos = infos})
 	end
 end)
-
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- storeHomeItem
+-----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNUICallback("storeHomeItem",function(data)
 	vRPNserver.storeHomeItem(tostring(chestOpen),data.item,data.amount)
 end)
-
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- takeHomeItem
+-----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNUICallback("takeHomeItem",function(data)
 	vRPNserver.takeHomeItem(tostring(chestOpen),data.item,data.amount)
 end)
-
 -----------------------------------------------------------------------------------------------------------------------------------------
--- TRUNKCHEST ---------------------------------------------------------------------------------------------------------------------------
+-- TRUNKCHEST
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNetEvent("trunkchest:Open")
 AddEventHandler("trunkchest:Open",function(data)
@@ -281,15 +324,21 @@ AddEventHandler("trunkchest:Open",function(data)
 		SendNUIMessage({ action = "updateTrunkChest" })
 	end
 end)
-
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- takeTrunkItem
+-----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNUICallback("takeTrunkItem",function(data)
 	vRPNserver.takeTrunkchestItem(data.item,data.amount)
 end)
-
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- storeTrunkItem
+-----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNUICallback("storeTrunkItem",function(data)
 	vRPNserver.storeTrunkItem(data.item,data.amount)
 end)
-
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- requestTrunkChest
+-----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNUICallback("requestTrunkChest",function(data,cb)
 	local inventario,inventario2,peso,maxpeso,peso2,maxpeso2 = vRPNserver.trunkChest()
 	if inventario then
@@ -297,13 +346,15 @@ RegisterNUICallback("requestTrunkChest",function(data,cb)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
---[ DROPITEM ]---------------------------------------------------------------------------------------------------------------------------
+-- DROPITEM
 -----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNUICallback("dropItem",function(data)
 	vRPNserver.dropItem(data.item,data.amount)
 	SendNUIMessage({ action = "showMenu" })
 end)
-
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- DROPITEM REMOVE
+-----------------------------------------------------------------------------------------------------------------------------------------
 local dropList = {}
 RegisterNetEvent('DropSystem:remove')
 AddEventHandler('DropSystem:remove',function(id)
@@ -311,12 +362,16 @@ AddEventHandler('DropSystem:remove',function(id)
 		dropList[id] = nil
 	end
 end)
-
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- DROPITEM CREAT FOR ALL
+-----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNetEvent('DropSystem:createForAll')
 AddEventHandler('DropSystem:createForAll',function(id,marker)
 	dropList[id] = marker
 end)
-
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- NS 4
+-----------------------------------------------------------------------------------------------------------------------------------------
 local cooldown = false
 Citizen.CreateThread(function()
 	while true do
@@ -355,26 +410,32 @@ AddEventHandler("EG:UpdateInv",function(action)
 	SendNUIMessage({ action = action })
 end)
 ---------------------------------------------------------------------------------------------------------------------------------------
--- LOJA DE DEPARTAMENTOS --------------------------------------------------------------------------------------------------------------
+-- LOJA DE DEPARTAMENTOS buyItem
 ---------------------------------------------------------------------------------------------------------------------------------------
 RegisterNUICallback("buyItem",function(data)
 	vRPNserver.tryBuyItem(data.item,data.amount,data.shop,data.method)
 	SendNUIMessage({ action = "updateShop", name = data.shop })
 end)
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- sellItem
+-----------------------------------------------------------------------------------------------------------------------------------------
 
 RegisterNUICallback("sellItem",function(data)
 	vRPNserver.trySellItem(data.item,data.amount,data.shop,data.method)
 	SendNUIMessage({ action = "updateShop", name = data.shop })
 end)
-
-
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- requestShop
+-----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNUICallback("requestShop",function(data,cb)
 	local inventoryShop,inventario,weight,maxweight,infos = vRPNserver.requestShop(data.shop)
 	if inventoryShop then
 		cb({ shops = inventoryShop, inventario = inventario, weight = weight, maxweight = maxweight, infos = infos })
 	end
 end)
-
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- NS 5
+-----------------------------------------------------------------------------------------------------------------------------------------
 local shopList = config.shopList
 Citizen.CreateThread(function()
 	while true do
@@ -396,19 +457,25 @@ Citizen.CreateThread(function()
 		Citizen.Wait(egsleep)
 	end
 end)
-
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- requestRevistar
+-----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNUICallback("requestRevistar",function(data,cb)
 	local inventario,nInventario = vRPNserver.Revistar()
 	cb({ inventario = inventario, nInventario = nInventario })
 end)
-
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- EG:REVISTAR
+-----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNetEvent("EG:REVISTAR")
 AddEventHandler("EG:REVISTAR",function()
 	SetNuiFocus(true,true)
 	StartScreenEffect("MenuMGSelectionIn", 0, true)
 	SendNUIMessage({ action = "updateRevistar", name = "REVISTAR"})
 end)
-
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- EG:ROUBAR
+-----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNetEvent("EG:ROUBAR")
 AddEventHandler("EG:ROUBAR",function()
 	roubando = true
@@ -416,18 +483,21 @@ AddEventHandler("EG:ROUBAR",function()
 	StartScreenEffect("MenuMGSelectionIn", 0, true)
 	SendNUIMessage({ action = "updateRevistar", name = "ROUBAR"})
 end)
-
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- EG SENDOROUBADO
+-----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNetEvent("EG:SENDOROUBADO")
 AddEventHandler("EG:SENDOROUBADO",function(value)
 	sendoRoubado = value
 end)
-
+-----------------------------------------------------------------------------------------------------------------------------------------
+-- requestRoubar
+-----------------------------------------------------------------------------------------------------------------------------------------
 RegisterNUICallback("requestRoubar",function(data,cb)
 	vRPNserver.Roubar(data)
 end)
-
 ---------------------------------------------------------------------------------------------------------------------------------------
--- CLONAR PLACAS ----------------------------------------------------------------------------------------------------------------------
+-- CLONAR PLACAS
 ---------------------------------------------------------------------------------------------------------------------------------------
 RegisterNetEvent('cloneplates')
 AddEventHandler('cloneplates',function()
@@ -444,7 +514,9 @@ AddEventHandler('cloneplates',function()
         end
     end
 end)
-
+---------------------------------------------------------------------------------------------------------------------------------------
+-- REMEDIOS 2
+---------------------------------------------------------------------------------------------------------------------------------------
 local usandoRemedios = false
 RegisterNetEvent("remedios2")
 AddEventHandler("remedios2",function()
@@ -472,7 +544,9 @@ AddEventHandler("remedios2",function()
 			usandoRemedios = false
 	end
 end)
-
+---------------------------------------------------------------------------------------------------------------------------------------
+-- REMEDIOS
+---------------------------------------------------------------------------------------------------------------------------------------
 RegisterNetEvent("remedios")
 AddEventHandler("remedios",function()
     local ped = PlayerPedId()
@@ -501,7 +575,7 @@ AddEventHandler("remedios",function()
 end)
 
 ---------------------------------------------------------------------------------------------------------------------------------------
--- FUNÇÕES ----------------------------------------------------------------------------------------------------------------------------
+-- FUNÇÕES
 ---------------------------------------------------------------------------------------------------------------------------------------
 Citizen.CreateThread(function()
 	while true do

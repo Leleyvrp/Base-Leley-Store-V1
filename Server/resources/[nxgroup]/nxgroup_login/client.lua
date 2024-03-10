@@ -6,9 +6,9 @@ Klaus = {}
 Tunnel.bindInterface("nxgroup_login", Klaus)
 vSERVER = Tunnel.getInterface("nxgroup_login")
 
-local cupom = "Evo RJ"
-local site = "https://discord.gg/klauscommunity / https://discord.gg/gSHUVHXNwP"
-local qrcode = "You Image"
+local cupom = ""
+local site = ""
+local qrcode = ""
 
 
 local cam = nil

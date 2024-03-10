@@ -87,24 +87,24 @@ end)
 -- -----------------------------------------------------------------------------------------------------------------------------------------
 -- -- GLOBALFUNCTIONS
 -- -----------------------------------------------------------------------------------------------------------------------------------------
--- RegisterCommand("globalFunctions",function(source,args)
--- 	if not vRP.isHandcuffed() and not menuOpen then
--- 		local ped = PlayerPedId()
--- 		if GetEntityHealth(ped) > 101 then
--- 			menuOpen = true
+RegisterCommand("globalFunctions",function(source,args)
+	if not vRP.isHandcuffed() and not menuOpen then
+		local ped = PlayerPedId()
+		if GetEntityHealth(ped) > 101 then
+			menuOpen = true
 
--- 			exports["dynamic"]:SubMenu("Propriedades","Todas as funções das propriedades.","propertys")
--- 			exports["dynamic"]:AddButton("Propriedades","Ativa/Desativa as propriedades no mapa.","homes:togglePropertys","","propertys",false)
+			exports["dynamic"]:SubMenu("Propriedades","Todas as funções das propriedades.","propertys")
+			exports["dynamic"]:AddButton("Propriedades","Ativa/Desativa as propriedades no mapa.","homes:togglePropertys","","propertys",false)
 
 
--- 			if animalHahs ~= nil then
--- 				exports["dynamic"]:SubMenu("Domésticos","Todas as funções dos animais domésticos.","animal")
--- 			end
+			if animalHahs ~= nil then
+				exports["dynamic"]:SubMenu("Domésticos","Todas as funções dos animais domésticos.","animal")
+			end
 
--- 			exports["dynamic"]:SubMenu("Outros","Todas as funções do personagem.","others")
--- 		end
--- 	end
--- end)
+			exports["dynamic"]:SubMenu("Outros","Todas as funções do personagem.","others")
+		end
+	end
+end)
 -- -----------------------------------------------------------------------------------------------------------------------------------------
 -- -- EMERGENCYFUNCTIONS
 -- -----------------------------------------------------------------------------------------------------------------------------------------
@@ -161,7 +161,7 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- KEYMAPPING
 -----------------------------------------------------------------------------------------------------------------------------------------
--- RegisterKeyMapping("globalFunctions","Abrir menu principal.","keyboard","F9")
+ RegisterKeyMapping("globalFunctions","Abrir menu principal.","keyboard","F9")
 -- RegisterKeyMapping("emergencyFunctions","Abrir menu de emergência.","keyboard","F10")
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- PED
