@@ -7,12 +7,12 @@ src = {} Tunnel.bindInterface("vrp_admin",src)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- WEBHOOK
 -----------------------------------------------------------------------------------------------------------------------------------------
-vRP.prepare ("EG/tirarRetencao", "UPDATE vrp_user_vehicles SET detido = '0', time = '0' WHERE user_id = @nuser_id AND vehicle = @vehicle")
+vRP.prepare ("EG/tirarRetencao", "UPDATE vrp_user_vehicles SET detido = "0", time = "0" WHERE user_id = @nuser_id AND vehicle = @vehicle")
 
-RegisterCommand('kickbugados',function(source,args,rawCommand)
+RegisterCommand("kickbugados",function(source,args,rawCommand)
     local user_id = vRP.getUserId(source)
     if vRP.hasPermission(user_id,"administrador.permissao")then
-        TriggerClientEvent('MQCU:bugado',-1)
+        TriggerClientEvent("MQCU:bugado",-1)
     end
 end)
 
@@ -27,22 +27,22 @@ AddEventHandler("MQCU:bugado",function()
     end
 end)
 
-RegisterCommand('iplspawn', function(source,args)
+RegisterCommand("iplspawn", function(source,args)
     local user_id = vRP.getUserId(source)
-    if vRP.hasPermission(user_id, 'mindmaster.permissao') then
-        TriggerClientEvent('EG:setipl', -1, args[1], args[2])
+    if vRP.hasPermission(user_id, "mindmaster.permissao") then
+        TriggerClientEvent("EG:setipl", -1, args[1], args[2])
     end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- CRASH
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand('crash',function(source,args)
+RegisterCommand("crash",function(source,args)
     local user_id = vRP.getUserId(source)
     if user_id then
         if vRP.hasPermission(user_id,"mindmaster.permissao") then
             local nplayer = vRP.getUserSource(parseInt(args[1]))
-            TriggerClientEvent('crash',nplayer)
-            sendLog('LogCrash',"[ID]: "..user_id.."\n[CRASHOU]: "..args[1].."",true)
+            TriggerClientEvent("crash",nplayer)
+            sendLog("LogCrash","[ID]: "..user_id.."\n[CRASHOU]: "..args[1].."",true)
         end
     end
 end)
@@ -50,7 +50,7 @@ end)
 ------------------------------------------------------------------------------
 ---- 30s    
 ------------------------------------------------------------------------------
-RegisterCommand('30s',function(source,args,rawCommand)
+RegisterCommand("30s",function(source,args,rawCommand)
     local user_id = vRP.getUserId(source)
     local nplayer = vRPclient.getNearestPlayer(source,2)
     local nuser_id = vRP.getUserId(nplayer)
@@ -68,7 +68,7 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- DM (MENSAGEM PRIVADA) 
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand('dm',function(source,args,rawCommand)
+RegisterCommand("dm",function(source,args,rawCommand)
     local user_id = vRP.getUserId(source)
     local nplayer = vRP.getUserSource(parseInt(args[1]))
     local identity = vRP.getUserIdentity(user_id)
@@ -87,9 +87,9 @@ RegisterCommand('dm',function(source,args,rawCommand)
         if mensagem == "" then
             return
         end
-        TriggerClientEvent('chatMessage',nplayer,"MENSAGEM DA ADMINISTRAÇÃO:",{255,0,0},mensagem)
-        TriggerClientEvent('smartphone:createSMS',nplayer, 'PREFEITURA', mensagem)
-        sendLog('LogDm',"[ID]: "..user_id.."\n[MANDOU DM PARA]: "..nplayer_id.."\n[MENSAGEM]: "..mensagem.."",true)
+        TriggerClientEvent("chatMessage",nplayer,"MENSAGEM DA ADMINISTRAÇÃO:",{255,0,0},mensagem)
+        TriggerClientEvent("smartphone:createSMS",nplayer, "PREFEITURA", mensagem)
+        sendLog("LogDm","[ID]: "..user_id.."\n[MANDOU DM PARA]: "..nplayer_id.."\n[MENSAGEM]: "..mensagem.."",true)
     end
 end)
 
@@ -97,7 +97,7 @@ end)
 -- VROUPAS
 -----------------------------------------------------------------------------------------------------------------------------------------
 local player_customs = {}
-RegisterCommand('vroupas',function(source,args,rawCommand)
+RegisterCommand("vroupas",function(source,args,rawCommand)
     local user_id = vRP.getUserId(source)
 	local custom = vRPclient.getCustomization(source)
 	
@@ -159,7 +159,7 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- ADM
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand('adm',function(source,args,rawCommand)
+RegisterCommand("adm",function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	if vRP.hasPermission(user_id,"administrador.permissao") then
 		local identity = vRP.getUserIdentity(user_id)
@@ -171,7 +171,7 @@ RegisterCommand('adm',function(source,args,rawCommand)
 		vRPclient.setDiv(-1,"anuncio",".div_anuncio { background: rgba(255,0,0,0.8); font-size: 11px; font-family: arial; color: #fff; padding: 20px; bottom: 18%; right: 5%; max-width: 500px; position: absolute; -webkit-border-radius: 5px; } bold { font-size: 15px; }","<bold>"..mensagem.."</bold><br><br>Mensagem da Administração")
 		
 
-        sendLog('LogAdmMsg',"[ID]: "..user_id.." "..identity.name.." "..identity.firstname.." \n[MANDOU NO /ADM]: "..mensagem.." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S"),true)
+        sendLog("LogAdmMsg","[ID]: "..user_id.." "..identity.name.." "..identity.firstname.." \n[MANDOU NO /ADM]: "..mensagem.." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S"),true)
     
 		SetTimeout(30000,function()
 			vRPclient.removeDiv(-1,"anuncio")
@@ -182,7 +182,7 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- MOD
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand('mod',function(source,args,rawCommand)
+RegisterCommand("mod",function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	if vRP.hasPermission(user_id,"moderador.permissao") then
 		local identity = vRP.getUserIdentity(user_id)
@@ -193,7 +193,7 @@ RegisterCommand('mod',function(source,args,rawCommand)
 		
 		vRPclient.setDiv(-1,"anuncio",".div_anuncio { background: rgba(0,255,0,0.8); font-size: 11px; font-family: arial; color: #fff; padding: 20px; bottom: 18%; right: 5%; max-width: 500px; position: absolute; -webkit-border-radius: 5px; } bold { font-size: 15px; }","<bold>"..mensagem.."</bold><br><br>Mensagem da Moderação")
 		
-        sendLog('LogMod',"[ID]: "..user_id.." "..identity.name.." "..identity.firstname.." \n[MANDOU NO /MOD]: "..mensagem.." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S"),true)
+        sendLog("LogMod","[ID]: "..user_id.." "..identity.name.." "..identity.firstname.." \n[MANDOU NO /MOD]: "..mensagem.." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S"),true)
         SetTimeout(30000,function()
 			vRPclient.removeDiv(-1,"anuncio")
 		end)
@@ -204,7 +204,7 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- GOVERNADOR
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand('governador',function(source,args,rawCommand)
+RegisterCommand("governador",function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	if vRP.hasPermission(user_id,"mindmaster.permissao") then
 		local identity = vRP.getUserIdentity(user_id)
@@ -215,7 +215,7 @@ RegisterCommand('governador',function(source,args,rawCommand)
 		
 		vRPclient.setDiv(-1,"anuncio",".div_anuncio { background: rgba(218,165,32,0.8); font-size: 11px; font-family: arial; color: #fff; padding: 20px; bottom: 18%; right: 5%; max-width: 500px; position: absolute; -webkit-border-radius: 5px; } bold { font-size: 15px; }","<bold>"..mensagem.."</bold><br><br>Mensagem do Governador")
 		
-        sendLog('LogGovernadorMsg',"[ID]: "..user_id.." "..identity.name.." "..identity.firstname.." \n[MANDOU NO /MOD]: "..mensagem.." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S"),true)
+        sendLog("LogGovernadorMsg","[ID]: "..user_id.." "..identity.name.." "..identity.firstname.." \n[MANDOU NO /MOD]: "..mensagem.." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S"),true)
         SetTimeout(30000,function()
 			vRPclient.removeDiv(-1,"anuncio")
 		end)
@@ -233,7 +233,7 @@ RegisterCommand("kicksrc",function(source,args,command)
         if vRP.hasPermission(user_id,"ac.permissao")then
             local nuser_id = vRP.getUserId(args[1])
             DropPlayer(args[1],"VOCE FOI KIKADO!")
-            sendLog('LogkickSrc',"[ID]: "..user_id.." "..identity.name.." "..identity.firstname.." \n[KIKOU A SOURCE]: "..args[1].." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S"),true)
+            sendLog("LogkickSrc","[ID]: "..user_id.." "..identity.name.." "..identity.firstname.." \n[KIKOU A SOURCE]: "..args[1].." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S"),true)
         end
     end
 end)
@@ -251,7 +251,7 @@ RegisterCommand("tdetido",function(source,args,command)
                 local vehicle = args[2]
                 vRP.execute("EG/tirarRetencao", {nuser_id=nuser_id,vehicle=vehicle})
                 TriggerClientEvent("Notify",source,"sucesso","Você removeu a detenção do carro: "..vehicle.." do ID: "..nuser_id..".") 
-                sendLog('logRetirarDetido',"[ID]: "..user_id.." "..identity.name.." "..identity.firstname.." \n[REMOVEU O DETIDO DO CARRO]: "..args[2].." \n[DO ID]: "..parseInt(args[1]).." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S"),true)
+                sendLog("logRetirarDetido","[ID]: "..user_id.." "..identity.name.." "..identity.firstname.." \n[REMOVEU O DETIDO DO CARRO]: "..args[2].." \n[DO ID]: "..parseInt(args[1]).." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S"),true)
             else
                 TriggerClientEvent("Notify",source,"negado","Você não adicionou o carro da pessoa.") 
             end
@@ -264,11 +264,11 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- DVAREA
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand('dvarea',function(source,args,rawCommand)
+RegisterCommand("dvarea",function(source,args,rawCommand)
     local user_id = vRP.getUserId(source)
     if vRP.hasPermission(user_id,"ac.permissao")  then
         local x,y,z = vRPclient.getPosition(source)
-        TriggerClientEvent('dvarea', source, args[1], x, y, z)
+        TriggerClientEvent("dvarea", source, args[1], x, y, z)
     else
         TriggerClientEvent("nyo_notify",source, "#8B0000","Negado", "SEM PERMISSÃO", 5000)
     end
@@ -277,7 +277,7 @@ end)
 -- ADD CAR
 -----------------------------------------------------------------------------------------------------------------------------------------
 vRP.prepare ("EG/add_vehicleLeads","INSERT IGNORE INTO vrp_user_vehicles(user_id,vehicle,ipva,free,free_time) VALUES(@user_id,@vehicle,@ipva,@free,@free_time)")
-RegisterCommand('addcar',function(source,args,rawCommand)
+RegisterCommand("addcar",function(source,args,rawCommand)
     local user_id = vRP.getUserId(source)
     local nplayer = vRP.getUserId(parseInt(args[2]))
     if vRP.hasPermission(user_id,"mindmaster.permissao") then
@@ -286,7 +286,7 @@ RegisterCommand('addcar',function(source,args,rawCommand)
             local identity = vRP.getUserIdentity(user_id)
             local identitynu = vRP.getUserIdentity(parseInt(args[2]))
             vRP.execute("EG/add_vehicleLeads",{ user_id = parseInt(args[2]),  vehicle = args[1], ipva = os.time(), free = 1, free_time = os.time() }) 
-            sendLog('LogAddCar',"[ID]: "..user_id.." "..identity.name.." "..identity.firstname.." \n[ADICIONOU]: "..args[1].." \n[PARA O ID]: "..nuser_id.." "..identitynu.name.." "..identitynu.firstname.." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S"),true) 
+            sendLog("LogAddCar","[ID]: "..user_id.." "..identity.name.." "..identity.firstname.." \n[ADICIONOU]: "..args[1].." \n[PARA O ID]: "..nuser_id.." "..identitynu.name.." "..identitynu.firstname.." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S"),true) 
             TriggerClientEvent("nyo_notify",source, "#00FF00","Sucesso", "Voce adicionou o veículo <b>"..args[1].."</b> para o Passaporte: <b>"..parseInt(args[2]).."</b>.", 5000)
         end
     end
@@ -295,7 +295,7 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- REM CAR
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand('remcar',function(source,args,rawCommand)
+RegisterCommand("remcar",function(source,args,rawCommand)
     local user_id = vRP.getUserId(source)
     local nplayer = vRP.getUserId(parseInt(args[2]))
     if vRP.hasPermission(user_id,"mindmaster.permissao") then
@@ -305,14 +305,14 @@ RegisterCommand('remcar',function(source,args,rawCommand)
             local identitynu = vRP.getUserIdentity(nuser_id)
             vRP.execute("creative/rem_vehicle",{ user_id = parseInt(args[2]), vehicle = args[1], ipva = parseInt(os.time())  }) 
                 TriggerClientEvent("nyo_notify",source, "#00FF00","Sucesso", "Voce removeu o veículo <b>"..args[1].."</b> do Passaporte: <b>"..parseInt(args[2]).."</b>.", 5000)
-                sendLog('LogRemCar',"[ID]: "..user_id.." "..identity.name.." "..identity.firstname.." \n[REMOVEU]: "..args[1].." \n[PARA O ID]: "..nuser_id.." "..identitynu.name.." "..identitynu.firstname.." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S"),true)
+                sendLog("LogRemCar","[ID]: "..user_id.." "..identity.name.." "..identity.firstname.." \n[REMOVEU]: "..args[1].." \n[PARA O ID]: "..nuser_id.." "..identitynu.name.." "..identitynu.firstname.." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S"),true)
 			end
     end
 end)
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- UNCUFF
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand('uncuff',function(source,args,rawCommand)
+RegisterCommand("uncuff",function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	if user_id then
 		if vRP.hasPermission(user_id,"moderador.permissao") then
@@ -323,7 +323,7 @@ end)
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- SYNCAREA
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand('limpararea',function(source,args,rawCommand)
+RegisterCommand("limpararea",function(source,args,rawCommand)
     local user_id = vRP.getUserId(source)
     local x,y,z = vRPclient.getPosition(source)
     if vRP.hasPermission(user_id,"moderador.permissao") then
@@ -333,7 +333,7 @@ end)
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- APAGAO
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand('apagao',function(source,args,rawCommand)
+RegisterCommand("apagao",function(source,args,rawCommand)
     local user_id = vRP.getUserId(source)
     if user_id ~= nil then
         local player = vRP.getUserSource(user_id)
@@ -346,7 +346,7 @@ end)
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- RAIOS
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand('raios', function(source,args,rawCommand)
+RegisterCommand("raios", function(source,args,rawCommand)
     local user_id = vRP.getUserId(source)
     if user_id ~= nil then
         local player = vRP.getUserSource(user_id)
@@ -359,7 +359,7 @@ end)
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- TROCAR SEXO
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand('skinped',function(source,args,rawCommand)
+RegisterCommand("skinped",function(source,args,rawCommand)
     local user_id = vRP.getUserId(source)
     if vRP.hasPermission(user_id,"administrador.permissao") or vRP.hasPermission(user_id,"mindmaster.permissao") or vRP.hasPermission(user_id,"moderador.permissao") then
         if parseInt(args[1]) then
@@ -374,14 +374,14 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- PLAYERS
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand('players',function(source,args,rawCommand)
+RegisterCommand("players",function(source,args,rawCommand)
 	local onlinePlayers = GetNumPlayerIndices()
-	TriggerClientEvent('chatMessage',source,"ALERTA",{255,70,50},"Jogadores online: "..onlinePlayers)
+	TriggerClientEvent("chatMessage",source,"ALERTA",{255,70,50},"Jogadores online: "..onlinePlayers)
 end)
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- DEBUG
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand('debug',function(source, args, rawCommand)
+RegisterCommand("debug",function(source, args, rawCommand)
 	local user_id = vRP.getUserId(source)
 	if user_id ~= nil then
 		local player = vRP.getUserSource(user_id)
@@ -402,20 +402,20 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- FIX
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand('fix',function(source,args,rawCommand)
+RegisterCommand("fix",function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	local vehicle = vRPclient.getNearestVehicle(source,11)
 	if vehicle then
 		if vRP.hasPermission(user_id,"administrador.permissao") or vRP.hasPermission(user_id,"moderador.permissao") or vRP.hasPermission(user_id,"mindmaster.permissao") or vRP.hasPermission(user_id,"suporte.permissao") then
-			TriggerClientEvent('reparar',source)
-            sendLog('LogFix',"[ID]: "..user_id.." \n[FIX]: Usou o comando /fix em um veículo. "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S"),true)
+			TriggerClientEvent("reparar",source)
+            sendLog("LogFix","[ID]: "..user_id.." \n[FIX]: Usou o comando /fix em um veículo. "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S"),true)
 		end
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- REVIVER
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand('god',function(source,args,rawCommand)
+RegisterCommand("god",function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	local identity = vRP.getUserIdentity(user_id)
 	if vRP.hasPermission(user_id,"administrador.permissao") or vRP.hasPermission(user_id,"moderador.permissao") or vRP.hasPermission(user_id,"mindmaster.permissao") or vRP.hasPermission(user_id,"suporte.permissao") then
@@ -429,7 +429,7 @@ RegisterCommand('god',function(source,args,rawCommand)
 				TriggerClientEvent("resetDiagnostic",nplayer)
 				vRP.varyThirst(nplayer,-100)
 				vRP.varyHunger(nplayer,-100)
-				endLog('LogGod',"[ID]: "..user_id.." \n[GOD]: Usou o comando /god no ID: "..args[1]..". "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S").."",true)
+				endLog("LogGod","[ID]: "..user_id.." \n[GOD]: Usou o comando /god no ID: "..args[1]..". "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S").."",true)
             end
         else
             vRPclient.killGod(source)
@@ -440,12 +440,12 @@ RegisterCommand('god',function(source,args,rawCommand)
 
             TriggerClientEvent("resetBleeding",source)
 			TriggerClientEvent("resetDiagnostic",source)
-			endLog('LogGod',"[ID]: "..user_id.." \n[GOD]: Usou o comando /god nele mesmo. "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S").."",true)
+			endLog("LogGod","[ID]: "..user_id.." \n[GOD]: Usou o comando /god nele mesmo. "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S").."",true)
         end
     end
 end)
 
-RegisterCommand('god2',function(source,args,rawCommand)
+RegisterCommand("god2",function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	local identity = vRP.getUserIdentity(user_id)
 	if vRP.hasPermission(user_id,"administrador.permissao") or vRP.hasPermission(user_id,"moderador.permissao") or vRP.hasPermission(user_id,"mindmaster.permissao") or vRP.hasPermission(user_id,"suporte.permissao") then
@@ -460,7 +460,7 @@ RegisterCommand('god2',function(source,args,rawCommand)
 				TriggerClientEvent("resetDiagnostic",nplayer)
 				vRP.varyThirst(nplayer,-15)
 				vRP.varyHunger(nplayer,-15)
-				sendLog('LogGod',"[ID]: "..user_id.." \n[GOD]: Usou o comando /god no ID: "..args[1]..". "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S").."",true)
+				sendLog("LogGod","[ID]: "..user_id.." \n[GOD]: Usou o comando /god no ID: "..args[1]..". "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S").."",true)
             end
         else
             vRPclient.killGod(source)
@@ -471,12 +471,12 @@ RegisterCommand('god2',function(source,args,rawCommand)
 
             TriggerClientEvent("resetBleeding",source)
 			TriggerClientEvent("resetDiagnostic",source)
-			sendLog('LogGod',"[ID]: "..user_id.." \n[GOD]: Usou o comando /god nele mesmo. "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S").."",true)
+			sendLog("LogGod","[ID]: "..user_id.." \n[GOD]: Usou o comando /god nele mesmo. "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S").."",true)
         end
     end
 end)
 
-RegisterCommand('godarea2', function(source, args, rawCommand)
+RegisterCommand("godarea2", function(source, args, rawCommand)
     local source = source
     local user_id = vRP.getUserId(source)
     local identity = vRP.getUserIdentity(user_id)
@@ -494,7 +494,7 @@ RegisterCommand('godarea2', function(source, args, rawCommand)
     end
 end)
 
-RegisterCommand('godarea', function(source, args, rawCommand)
+RegisterCommand("godarea", function(source, args, rawCommand)
     local source = source
     local user_id = vRP.getUserId(source)
     local identity = vRP.getUserIdentity(user_id)
@@ -514,7 +514,7 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- REVIVER ALL
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand('godall',function(source,args,rawCommand)
+RegisterCommand("godall",function(source,args,rawCommand)
     local user_id = vRP.getUserId(source)
     if vRP.hasPermission(user_id,"mindmaster.permissao") then
     	local users = vRP.getUsers()
@@ -524,7 +524,7 @@ RegisterCommand('godall',function(source,args,rawCommand)
             	vRPclient.killGod(id)
 				vRPclient.setHealth(id,400)
 				print(id)
-                sendLog('LogGodAll',"[ID]: "..user_id.." \n[GOD]: DEU GOD EM TODOS "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S"),true)
+                sendLog("LogGodAll","[ID]: "..user_id.." \n[GOD]: DEU GOD EM TODOS "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S"),true)
             end
         end
     end
@@ -532,32 +532,32 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- HASH
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand('hash',function(source,args,rawCommand)
+RegisterCommand("hash",function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	if vRP.hasPermission(user_id,"mindmaster.permissao") then
-		TriggerClientEvent('vehash',source)
+		TriggerClientEvent("vehash",source)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- TUNING
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand('tuning',function(source,args,rawCommand)
+RegisterCommand("tuning",function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	if vRP.hasPermission(user_id,"mindmaster.permissao") then
-		TriggerClientEvent('vehtuning',source)
+		TriggerClientEvent("vehtuning",source)
 	end
 end)
 
-RegisterCommand('tuning2',function(source,args,rawCommand)
+RegisterCommand("tuning2",function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	if vRP.hasPermission(user_id,"administrador.permissao")  then
-		TriggerClientEvent('vehtuning2',source)
+		TriggerClientEvent("vehtuning2",source)
 	end
 end)
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- FUEL
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand('fuel',function(source,args,rawCommand)
+RegisterCommand("fuel",function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	if user_id then
 		if vRP.hasPermission(user_id,"mindmaster.permissao") then
@@ -568,35 +568,35 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- WL
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand('wl',function(source,args,rawCommand)
+RegisterCommand("wl",function(source,args,rawCommand)
     local user_id = vRP.getUserId(source)
     local identity = vRP.getUserIdentity(user_id)
     if vRP.hasPermission(user_id,"ac.permissao") then
         if args[1] then
             vRP.setWhitelisted(parseInt(args[1]),true)
             TriggerClientEvent("Notify",source,"sucesso","Voce aprovou o passaporte <b>"..args[1].."</b> na whitelist.")
-            sendLog('LogWl',"[ID]: "..user_id.." "..identity.name.." "..identity.firstname.." \n[APROVOU WL]: "..args[1].." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S"),true)
+            sendLog("LogWl","[ID]: "..user_id.." "..identity.name.." "..identity.firstname.." \n[APROVOU WL]: "..args[1].." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S"),true)
         end
     end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- UNWL
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand('unwl',function(source,args,rawCommand)
+RegisterCommand("unwl",function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	local identity = vRP.getUserIdentity(user_id)
 	if vRP.hasPermission(user_id,"moderador.permissao") then
 		if args[1] then
 			vRP.setWhitelisted(parseInt(args[1]),false)
 			TriggerClientEvent("Notify",source,"sucesso","Voce retirou o passaporte <b>"..args[1].."</b> da whitelist.")
-            sendLog('LogUnWl',"[ID]: "..user_id.." "..identity.name.." "..identity.firstname.." \n[RETIROU WL]: "..args[1].." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S"),true)
+            sendLog("LogUnWl","[ID]: "..user_id.." "..identity.name.." "..identity.firstname.." \n[RETIROU WL]: "..args[1].." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S"),true)
 		end
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- KICK
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand('kick',function(source,args,rawCommand)
+RegisterCommand("kick",function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	local identity = vRP.getUserIdentity(user_id)
 	
@@ -606,7 +606,7 @@ RegisterCommand('kick',function(source,args,rawCommand)
 			if id then
 				vRP.kick(id,"Você foi expulso da cidade.")
 				TriggerClientEvent("Notify",source,"sucesso","Voce kickou o passaporte <b>"..args[1].."</b> da cidade.")
-                sendLog('LogKick',"[ID]: "..user_id.." "..identity.name.." "..identity.firstname.." \n[KICKOU]: "..args[1].." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S"),true)
+                sendLog("LogKick","[ID]: "..user_id.." "..identity.name.." "..identity.firstname.." \n[KICKOU]: "..args[1].." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S"),true)
 			end
 		end
 	end
@@ -614,7 +614,7 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- KICK ALL
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand('kickall',function(source,args,rawCommand)
+RegisterCommand("kickall",function(source,args,rawCommand)
     local user_id = vRP.getUserId(source)
     if vRP.hasPermission(user_id,"mindmaster.permissao") then
         local users = vRP.getUsers()
@@ -628,8 +628,8 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- BAN
 -----------------------------------------------------------------------------------------------------------------------------------------
-vRP.prepare ("EG/updateBanido", "UPDATE vrp_users SET banned = '1', hack = @isHack, Motivo = @motivo WHERE id = @user_id")
-RegisterCommand('ban',function(source,args,rawCommand)
+vRP.prepare ("EG/updateBanido", "UPDATE vrp_users SET banned = "1", hack = @isHack, Motivo = @motivo WHERE id = @user_id")
+RegisterCommand("ban",function(source,args,rawCommand)
     local user_id = vRP.getUserId(source)
     local nuser_id = vRP.getUserId(source)
 	local identity = vRP.getUserIdentity(user_id)
@@ -645,13 +645,13 @@ RegisterCommand('ban',function(source,args,rawCommand)
             vRP.setBanned(idBanido,true)
             vRP.execute("EG/updateBanido", {user_id = idBanido, isHack = 0, motivo = motivoStaff})
 			TriggerClientEvent("Notify",source,"sucesso","Voce baniu o passaporte <b>"..args[1].."</b> da cidade.")
-            sendLog('LogBan',"[ID]: "..user_id.." "..identity.name.." "..identity.firstname.." \n[BANIU]: "..idBanido.." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S"),true)
+            sendLog("LogBan","[ID]: "..user_id.." "..identity.name.." "..identity.firstname.." \n[BANIU]: "..idBanido.." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S"),true)
             vRP.kick(idBanido,"Você foi expulso da cidade.")
 		end
     end
 end)
 
-RegisterCommand('ban2',function(source,args,rawCommand)
+RegisterCommand("ban2",function(source,args,rawCommand)
     local user_id = vRP.getUserId(source)
     local nuser_id = vRP.getUserId(source)
 	local identity = vRP.getUserIdentity(user_id)
@@ -661,7 +661,7 @@ RegisterCommand('ban2',function(source,args,rawCommand)
             vRP.setBanned(idBanido,true)
             vRP.execute("EG/updateBanido", {user_id = idBanido, isHack = 1, motivo="HACKEG"})
 			TriggerClientEvent("Notify",source,"sucesso","Voce baniu o passaporte <b>"..args[1].."</b> da cidade <b>POR HACK</b>!")
-            sendLog('LogBan2Hack',"[ID]: "..user_id.." "..identity.name.." "..identity.firstname.." \n[BANIU]: "..args[1].." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S"),true)
+            sendLog("LogBan2Hack","[ID]: "..user_id.." "..identity.name.." "..identity.firstname.." \n[BANIU]: "..args[1].." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S"),true)
 		end
     end
 end)
@@ -669,44 +669,44 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- UNBAN
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand('unban',function(source,args,rawCommand)
+RegisterCommand("unban",function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	local identity = vRP.getUserIdentity(user_id)
 	if vRP.hasPermission(user_id,"moderador.permissao") then
 		if args[1] then
 			vRP.setBanned(parseInt(args[1]),false)
 			TriggerClientEvent("Notify",source,"sucesso","Voce desbaniu o passaporte <b>"..args[1].."</b> da cidade.")
-            sendLog('LogUnban',"[ID]: "..user_id.." "..identity.name.." "..identity.firstname.." \n[DESBANIU]: "..args[1].." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S"),true)
+            sendLog("LogUnban","[ID]: "..user_id.." "..identity.name.." "..identity.firstname.." \n[DESBANIU]: "..args[1].." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S"),true)
 		end
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- MONEY
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand('money',function(source,args,rawCommand)
+RegisterCommand("money",function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	local identity = vRP.getUserIdentity(user_id)
 	if vRP.hasPermission(user_id,"mindmaster.permissao") then
 		if args[1] then
 			vRP.giveMoney(user_id,parseInt(args[1]))
-            sendLog('SpawnMoney',"[ID]: "..user_id.." "..identity.name.." "..identity.firstname.." \n[FEZ]: $"..vRP.format(parseInt(args[1])).." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S"),true)
+            sendLog("SpawnMoney","[ID]: "..user_id.." "..identity.name.." "..identity.firstname.." \n[FEZ]: $"..vRP.format(parseInt(args[1])).." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S"),true)
 		end
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- NC
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand('nc',function(source,args,rawCommand)
+RegisterCommand("nc",function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	if vRP.hasPermission(user_id,"ac.permissao") then
 		vRPclient.toggleNoclip(source)
-        senLog('LogNc',"```prolog\n[ID]: "..user_id.." \n[USOU]: NC "..vRP.format(parseInt(args[1])).." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S"),true)
+        senLog("LogNc","```prolog\n[ID]: "..user_id.." \n[USOU]: NC "..vRP.format(parseInt(args[1])).." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S"),true)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- TPCDS
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand('tpcds',function(source,args,rawCommand)
+RegisterCommand("tpcds",function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	if vRP.hasPermission(user_id,"moderador.permissao") or vRP.hasPermission(user_id,"mindmaster.permissao") then
 		local fcoords = vRP.prompt(source,"Cordenadass:","")
@@ -722,18 +722,18 @@ RegisterCommand('tpcds',function(source,args,rawCommand)
 end)
 
 local trolls = {}
-RegisterCommand('troll', function(source,args,rawCommand)
+RegisterCommand("troll", function(source,args,rawCommand)
     local user_id = vRP.getUserId(source)
-    if vRP.hasPermission(user_id,'administrador.permissao') then
+    if vRP.hasPermission(user_id,"administrador.permissao") then
         if args[1] and args[2] then
             local player = tonumber(args[2])
-            if args[1] == 'add' then
+            if args[1] == "add" then
                 trolls[player] = true
                 vRP.setBanned(player,true)
-                TriggerClientEvent('Notify',source,'sucesso','Colocou o troll na ilha dos TROLLS')
-            elseif args[1] == 'remover' then
+                TriggerClientEvent("Notify",source,"sucesso","Colocou o troll na ilha dos TROLLS")
+            elseif args[1] == "remover" then
                 trolls[player] = false
-                TriggerClientEvent('Notify',source,'sucesso','removeu o troll da ilha dos TROLLS')
+                TriggerClientEvent("Notify",source,"sucesso","removeu o troll da ilha dos TROLLS")
             end
         end
     end
@@ -746,7 +746,7 @@ Citizen.CreateThread( function()
                 local player = vRP.getUserSource(tonumber(k))
                 if player then
                     vRPclient.setHealth(player,400)
-                    TriggerClientEvent('tpTroll',player)
+                    TriggerClientEvent("tpTroll",player)
                 end
             end
         end
@@ -756,16 +756,16 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- COORDENADAS
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand('cds',function(source,args,rawCommand)
+RegisterCommand("cds",function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	if vRP.hasPermission(user_id,"ac.permissao") or vRP.hasPermission(user_id,"mindmaster.permissao") then
 		local x,y,z = vRPclient.getPosition(source)
 		heading = GetEntityHeading(GetPlayerPed(-1))
-		vRP.prompt(source,"Cordenadas:","['x'] = "..tD(x)..", ['y'] = "..tD(y)..", ['z'] = "..tD(z))
+		vRP.prompt(source,"Cordenadas:","["x"] = "..tD(x)..", ["y"] = "..tD(y)..", ["z"] = "..tD(z))
 	end
 end)
 
-RegisterCommand('cds2',function(source,args,rawCommand)
+RegisterCommand("cds2",function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	if vRP.hasPermission(user_id,"ac.permissao") or vRP.hasPermission(user_id,"mindmaster.permissao") then
 		local x,y,z = vRPclient.getPosition(source)
@@ -773,7 +773,7 @@ RegisterCommand('cds2',function(source,args,rawCommand)
 	end
 end)
 
-RegisterCommand('cds3',function(source,args,rawCommand)
+RegisterCommand("cds3",function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	h = GetEntityHeading(GetPlayerPed(source))
 	if vRP.hasPermission(user_id,"ac.permissao") then
@@ -782,7 +782,7 @@ RegisterCommand('cds3',function(source,args,rawCommand)
 	end
 end)
 
-RegisterCommand('cds4',function(source,args,rawCommand)
+RegisterCommand("cds4",function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	h = GetEntityHeading(GetPlayerPed(source))
 	if vRP.hasPermission(user_id,"ac.permissao") then
@@ -791,12 +791,12 @@ RegisterCommand('cds4',function(source,args,rawCommand)
 	end
 end)
 
-RegisterCommand('cds5',function(source,args,rawCommand)
+RegisterCommand("cds5",function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	h = GetEntityHeading(GetPlayerPed(source))
 	if vRP.hasPermission(user_id,"ac.permissao") then
 		local x,y,z = vRPclient.getPosition(source)
-		vRP.prompt(source,"Cordenadas:","['x'] = "..tD(x)..", ['y'] = "..tD(y)..", ['z'] = "..tD(z)..", ['h'] = "..tD(h))
+		vRP.prompt(source,"Cordenadas:","["x"] = "..tD(x)..", ["y"] = "..tD(y)..", ["z"] = "..tD(z)..", ["h"] = "..tD(h))
 	end
 end)
 
@@ -807,7 +807,7 @@ end
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- GROUP
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand('group',function(source,args,rawCommand)
+RegisterCommand("group",function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	local identity = vRP.getUserIdentity(user_id)
 	if vRP.hasPermission(user_id,"mindmaster.permissao") then
@@ -821,7 +821,7 @@ RegisterCommand('group',function(source,args,rawCommand)
 		elseif args[1] and args[2] then
 			vRP.addUserGroup(parseInt(args[1]),args[2])
 			TriggerClientEvent("Notify",source,"sucesso","Voce setou o passaporte <b>"..parseInt(args[1]).."</b> no grupo <b>"..args[2].."</b>.")
-			sendLog('LogAdmin',"[ID]: "..user_id.." "..identity.name.." "..identity.firstname.." \n[SETOU]: "..args[1].." \n[GRUPO]: "..args[2].." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S").."",true)
+			sendLog("LogAdmin","[ID]: "..user_id.." "..identity.name.." "..identity.firstname.." \n[SETOU]: "..args[1].." \n[GRUPO]: "..args[2].." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S").."",true)
 			return true
 		end
 	elseif vRP.hasPermission(user_id,"moderador.permissao") then
@@ -836,14 +836,14 @@ RegisterCommand('group',function(source,args,rawCommand)
 		elseif args[1] and args[2] then
 			vRP.addUserGroup(parseInt(args[1]),args[2])
 			TriggerClientEvent("Notify",source,"sucesso","Voce setou o passaporte <b>"..parseInt(args[1]).."</b> no grupo <b>"..args[2].."</b>.")
-			sendLog('LogAdmin',"[ID]: "..user_id.." "..identity.name.." "..identity.firstname.." \n[SETOU]: "..args[1].." \n[GRUPO]: "..args[2].." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S").."",true)
+			sendLog("LogAdmin","[ID]: "..user_id.." "..identity.name.." "..identity.firstname.." \n[SETOU]: "..args[1].." \n[GRUPO]: "..args[2].." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S").."",true)
 		end
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- UNGROUP
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand('ungroup',function(source,args,rawCommand)
+RegisterCommand("ungroup",function(source,args,rawCommand)
     local user_id = vRP.getUserId(source)
     local identity = vRP.getUserIdentity(user_id)
     if vRP.hasPermission(user_id,"moderador.permissao") then
@@ -853,7 +853,7 @@ RegisterCommand('ungroup',function(source,args,rawCommand)
                 if vRP.hasGroup(parseInt(args[1]),args[2]) then
                     vRP.removeUserGroup(parseInt(args[1]),args[2])
                     TriggerClientEvent("Notify",source,"sucesso","Voce removeu o passaporte <b>"..parseInt(args[1]).."</b> do grupo <b>"..args[2].."</b>.")
-                    sendLog('LogAdmin',"[ID]: "..user_id.." "..identity.name.." "..identity.firstname.." \n[TIROU O SET]: "..args[1].." \n[GRUPO]: "..args[2].." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S").."",true)
+                    sendLog("LogAdmin","[ID]: "..user_id.." "..identity.name.." "..identity.firstname.." \n[TIROU O SET]: "..args[1].." \n[GRUPO]: "..args[2].." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S").."",true)
                 else
                     TriggerClientEvent("Notify",source,"negado","O passaporte <b>"..parseInt(args[1]).."</b> não está setado com o grupo de <b>"..args[2].."</b>.")
                 end
@@ -864,7 +864,7 @@ RegisterCommand('ungroup',function(source,args,rawCommand)
                 end
                 vRP.setUData(parseInt(args[1]),"vRP:datatable",json.encode(data))
                 TriggerClientEvent("Notify",source,"sucesso","Voce removeu o passaporte <b>"..parseInt(args[1]).."</b> do grupo <b>"..args[2].."</b>.")
-                sendLog('LogAdmin',"[ID]: "..user_id.." "..identity.name.." "..identity.firstname.." \n[TIROU O SET]: "..args[1].." \n[GRUPO]: "..args[2].." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S").."",true)
+                sendLog("LogAdmin","[ID]: "..user_id.." "..identity.name.." "..identity.firstname.." \n[TIROU O SET]: "..args[1].." \n[GRUPO]: "..args[2].." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S").."",true)
             end
         end
     end
@@ -872,7 +872,7 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- TPTOME
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand('tptome',function(source,args,rawCommand)
+RegisterCommand("tptome",function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	if vRP.hasPermission(user_id,"ac.permissao") then
 		if args[1] then
@@ -880,7 +880,7 @@ RegisterCommand('tptome',function(source,args,rawCommand)
 			local x,y,z = vRPclient.getPosition(source)
 			if tplayer then
 				vRPclient.teleport(tplayer,x,y,z)
-				sendLog('LogTp',"[ID]: "..user_id.." \n[PUXOU O ID]: "..args[1].." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S").."",true)
+				sendLog("LogTp","[ID]: "..user_id.." \n[PUXOU O ID]: "..args[1].." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S").."",true)
 			end
 		end
 	end
@@ -888,14 +888,14 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- TPTO
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand('tpto',function(source,args,rawCommand)
+RegisterCommand("tpto",function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	if vRP.hasPermission(user_id,"ac.permissao") then
 		if args[1] then
 			local tplayer = vRP.getUserSource(parseInt(args[1]))
 			if tplayer then
 				vRPclient.teleport(source,vRPclient.getPosition(tplayer))
-				sendLog('LogTp',"[ID]: "..user_id.." \n[TELEPORTOU PARA O ID]: "..args[1].." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S").."",true)
+				sendLog("LogTp","[ID]: "..user_id.." \n[TELEPORTOU PARA O ID]: "..args[1].." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S").."",true)
 			end
 		end
 	end
@@ -903,26 +903,26 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- TPWAY
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand('tpway',function(source,args,rawCommand)
+RegisterCommand("tpway",function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	if vRP.hasPermission(user_id,"administrador.permissao") or vRP.hasPermission(user_id,"moderador.permissao") or vRP.hasPermission(user_id,"mindmaster.permissao") then
-		TriggerClientEvent('tptoway',source)
-        sendLog('LogTp',"[ID]: "..user_id.." \n[UTILIZOU TPWAY]"..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S").."",true)
+		TriggerClientEvent("tptoway",source)
+        sendLog("LogTp","[ID]: "..user_id.." \n[UTILIZOU TPWAY]"..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S").."",true)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- DELNPCS
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand('delnpcs',function(source,args,rawCommand)
+RegisterCommand("delnpcs",function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	if vRP.hasPermission(user_id,"administrador.permissao") or vRP.hasPermission(user_id,"mindmaster.permissao") then
-		TriggerClientEvent('delnpcs',source)
+		TriggerClientEvent("delnpcs",source)
 	end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- PLAYERSON
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand('pon',function(source,args,rawCommand)
+RegisterCommand("pon",function(source,args,rawCommand)
     local user_id = vRP.getUserId(source)
     if vRP.hasPermission(user_id,"moderador.permissao") or vRP.hasPermission(user_id,"mindmaster.permissao") then
         local users = vRP.getUsers()
@@ -935,14 +935,14 @@ RegisterCommand('pon',function(source,args,rawCommand)
             players = players..k
             quantidade = quantidade + 1
         end
-        TriggerClientEvent('chatMessage',source,"TOTAL ONLINE",{255,160,0},quantidade)
-        TriggerClientEvent('chatMessage',source,"ID's ONLINE",{255,160,0},players)
+        TriggerClientEvent("chatMessage",source,"TOTAL ONLINE",{255,160,0},quantidade)
+        TriggerClientEvent("chatMessage",source,"ID"s ONLINE",{255,160,0},players)
     end
 end)
 ----------------------------------------------------------------------------------------------------------------------------------------
 -- MUDAR COR DO CARRO
 ----------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand('carcolor',function(source,args,rawCommand)
+RegisterCommand("carcolor",function(source,args,rawCommand)
     local user_id = vRP.getUserId(source)
     if vRP.hasPermission(user_id,"mindmaster.permissao") then
 		local vehicle,vehNet = vRPclient.vehList(source,5)
@@ -950,33 +950,32 @@ RegisterCommand('carcolor',function(source,args,rawCommand)
             local rgb = vRP.prompt(source,"RGB Color(255 255 255):"," ")
             rgb = sanitizeString(rgb,"\"[]{}+=?!_()#@%/\\|,.",false)
             local r,g,b = table.unpack(splitString(rgb," "))
-			TriggerClientEvent('vcolorv',source,vehicle,tonumber(r),tonumber(g),tonumber(b))
-			TriggerClientEvent('chatMessage',source,"ALERTA",{255,70,50},"Cor ^1alterada")
+			TriggerClientEvent("vcolorv",source,vehicle,tonumber(r),tonumber(g),tonumber(b))
+			TriggerClientEvent("chatMessage",source,"ALERTA",{255,70,50},"Cor ^1alterada")
         end
     end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- DV
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand('dv',function(source)
+RegisterCommand("dv",function(source)
     local user_id = vRP.getUserId(source)
-    if vRP.hasPermission(user_id, 'administrador.permissao') then
-        local veh, netId, plate, vName = vRPclient.vehList(source, 25.0)
-        TriggerEvent('nyo_module:delete_vehicle',netId,vName)
+    if vRP.hasPermission(user_id, "administrador.permissao") then
+        TriggerEvent("GARAGES:DELETE")
     end
 end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- CAR
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand('car',function(source,args,rawCommand)
+RegisterCommand("car",function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	if user_id then
 		local identity = vRP.getUserIdentity(user_id)
 		if vRP.hasPermission(user_id,"administrador.permissao") then
 			if args[1] then
-				TriggerClientEvent('spawnarveiculo',source,args[1])
+				TriggerClientEvent("spawnarveiculo",source,args[1])
 				TriggerEvent("setPlateEveryone",identity.registration)
-				sendLog('LogSpawnVeiculo',"[ID]: "..user_id.." \n[SPAWNOU]: "..args[1]..""..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S").."",true) 
+				sendLog("LogSpawnVeiculo","[ID]: "..user_id.." \n[SPAWNOU]: "..args[1]..""..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S").."",true) 
 			end
 		end
 	end
@@ -984,7 +983,7 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- KILLALL
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand('killall',function(source,args,rawCommand)
+RegisterCommand("killall",function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	local identity = vRP.getUserIdentity(user_id)
     if vRP.hasPermission(user_id,"mindmaster.permissao") then
@@ -1005,7 +1004,7 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- KILL
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand('kill',function(source,args,rawCommand)
+RegisterCommand("kill",function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	local identity = vRP.getUserIdentity(user_id)
     if vRP.hasPermission(user_id,"mindmaster.permissao") then
@@ -1019,14 +1018,14 @@ RegisterCommand('kill',function(source,args,rawCommand)
 			args[1] = user_id
             vRPclient.setHealth(source,0)
 		end	
-		sendLog('LogAdmin',"[ID]: "..user_id.." "..identity.name.." "..identity.firstname.." \n[KILL]: "..args[1].." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S").."",true)
+		sendLog("LogAdmin","[ID]: "..user_id.." "..identity.name.." "..identity.firstname.." \n[KILL]: "..args[1].." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S").."",true)
 	end
 end)
 
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- LIMPAR INVENTARIO
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand('limparinv',function(source,args,rawCommand)
+RegisterCommand("limparinv",function(source,args,rawCommand)
     local user_id = vRP.getUserId(source)
     local player = vRP.getUserSource(user_id)
     if vRP.hasPermission(user_id,"mindmaster.permissao") then
@@ -1037,7 +1036,7 @@ RegisterCommand('limparinv',function(source,args,rawCommand)
             local identity = vRP.getUserIdentity(user_id)
             vRP.clearInventory(user_id)
 				TriggerClientEvent("Notify",source,"sucesso","Limpou inventario do <id>"..args[1].."</b>.")
-                sendLog('LogAdmin',"[ID]: "..user_id.." "..identity.name.." "..identity.firstname.." \n[LIMPROU O INVENTARIO DO ID]: "..args[1].." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S").."",true)
+                sendLog("LogAdmin","[ID]: "..user_id.." "..identity.name.." "..identity.firstname.." \n[LIMPROU O INVENTARIO DO ID]: "..args[1].." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S").."",true)
 
             else
                 TriggerClientEvent("Notify",source,"negado","O usuário não foi encontrado ou está offline.")
@@ -1048,7 +1047,7 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- RG2 - ver os sets do player
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand('rg2',function(source,args,rawCommand)
+RegisterCommand("rg2",function(source,args,rawCommand)
     local user_id = vRP.getUserId(source)
     if vRP.hasPermission(user_id,"mindmaster.permissao") or vRP.hasPermission(user_id,"administrador.permissao")then
         local nuser_id = parseInt(args[1])
@@ -1069,7 +1068,7 @@ end)
 ----------------------------------------------------------------------------------------------------------------
 -- RENAME
 ----------------------------------------------------------------------------------------------------------------
-RegisterCommand('rename',function(source,args,rawCommand)
+RegisterCommand("rename",function(source,args,rawCommand)
     local user_id = vRP.getUserId(source)
     if vRP.hasPermission(user_id, "moderador.permissao") or vRP.hasPermission(user_id, "advogado.permissao")  or vRP.hasPermission(user_id,"promotor.permissao") or vRP.hasPermission(user_id,"desembargador.permissao") then
         local idjogador = vRP.prompt(source, "PASSAPORTE: ", "")
@@ -1096,7 +1095,7 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- RESET PERSONAGEM
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand('reset',function(source,args,rawCommand)
+RegisterCommand("reset",function(source,args,rawCommand)
     local user_id = vRP.getUserId(source)
     local identity = vRP.getUserIdentity(user_id)
     if user_id then
@@ -1107,7 +1106,7 @@ RegisterCommand('reset',function(source,args,rawCommand)
                 if id then
                     vRP.setUData(id,"vRP:spawnController",json.encode(1))
                     TriggerClientEvent("Notify",source,"sucesso","Você <b>resetou</b> o personagem do passaporte <b>"..vRP.format(parseInt(args[1])).."</b>.",5000)
-                    sendLog('LogReset',"[ID]: "..user_id.." "..identity.name.." "..identity.firstname.." \n[RESETOU A APARENCIA DO ID]: "..id.." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S"),true)
+                    sendLog("LogReset","[ID]: "..user_id.." "..identity.name.." "..identity.firstname.." \n[RESETOU A APARENCIA DO ID]: "..id.." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S"),true)
                 end
             end
         end
@@ -1117,7 +1116,7 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- VERIFICAR FERIMENTO
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand('vferimento',function(source,args,rawCommand)
+RegisterCommand("vferimento",function(source,args,rawCommand)
 	local user_id = vRP.getUserId(source)
 	if vRP.hasPermission(user_id,"paramedico.permissao") or vRP.hasPermission(user_id,"mindmaster.permissao") then
 		local nplayer = vRPclient.getNearestPlayer(source,2)
@@ -1144,7 +1143,7 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- STATUS
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand('status',function(source,args,rawCommand)
+RegisterCommand("status",function(source,args,rawCommand)
     local user_id = vRP.getUserId(source)
     if vRP.hasPermission(user_id,"ac.permissao") then
         local onlinePlayers = GetNumPlayerIndices()
@@ -1271,7 +1270,7 @@ end)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- FESTA
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand('festa',function(source,args,rawCommand)
+RegisterCommand("festa",function(source,args,rawCommand)
     local user_id = vRP.getUserId(source)
     if vRP.hasPermission(user_id,"ac.permissao") then
         local identity = vRP.getUserIdentity(user_id)
@@ -1280,7 +1279,7 @@ RegisterCommand('festa',function(source,args,rawCommand)
             return
         end
         vRPclient.setDiv(-1,"festinha"," @keyframes blinking {    0%{ background-color: #ff3d50; border: 2px solid #871924; opacity: 0.8; } 25%{ background-color: #d22d99; border: 2px solid #901f69; opacity: 0.8; } 50%{ background-color: #55d66b; border: 2px solid #126620; opacity: 0.8; } 75%{ background-color: #22e5e0; border: 2px solid #15928f; opacity: 0.8; } 100%{ background-color: #222291; border: 2px solid #6565f2; opacity: 0.8; }  } .div_festinha { font-size: 11px; font-family: arial; color: rgba(255, 255, 255,1); padding: 20px; bottom: 10%; right: 5%; max-width: 500px; position: absolute; -webkit-border-radius: 5px; animation: blinking 1s infinite; } bold { font-size: 16px; }","<bold>"..mensagem.."</bold><br><br>Festeiro(a): "..identity.name.." "..identity.firstname)
-        sendLog('LogComandoFesta',"[ID]: "..user_id.." "..identity.name.." "..identity.firstname.." \n[MANDOU NO /FESTA]: "..mensagem.." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S"),true)
+        sendLog("LogComandoFesta","[ID]: "..user_id.." "..identity.name.." "..identity.firstname.." \n[MANDOU NO /FESTA]: "..mensagem.." "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S"),true)
          SetTimeout(15000,function()
             vRPclient.removeDiv(-1,"festinha")
         end)
@@ -1289,11 +1288,11 @@ end)
 -------------------------------------------------------------------------------------------------------------------------------------------
 -- CLEAR VEH
 -------------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand('clearallveh', function(source, args, rawCommand)
+RegisterCommand("clearallveh", function(source, args, rawCommand)
     local user_id = vRP.getUserId(source)
     if user_id ~= nil then
         if vRP.hasPermission(user_id,"mindmaster.permissao") then
-            TriggerClientEvent('chatMessage', -1, "^1ADMIN: ^0Contagem Iniciada ^260s^0 para limpeza de veiculos. (Entre em seu veiculo para não ser removido)")
+            TriggerClientEvent("chatMessage", -1, "^1ADMIN: ^0Contagem Iniciada ^260s^0 para limpeza de veiculos. (Entre em seu veiculo para não ser removido)")
             Wait(60000)
 
             local deleteCount = 0
@@ -1305,14 +1304,14 @@ RegisterCommand('clearallveh', function(source, args, rawCommand)
                 end
             end
 
-            TriggerClientEvent('chatMessage', -1, "^1ADMIN: ^0"..deleteCount.." veiculo deletados!")
+            TriggerClientEvent("chatMessage", -1, "^1ADMIN: ^0"..deleteCount.." veiculo deletados!")
         end
     end
 end)
 -------------------------------------------------------------------------------------------------------------------------------------------
 -- CLEAR OBJETOS
 -------------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand('clearallobj', function(source, args, rawCommand)
+RegisterCommand("clearallobj", function(source, args, rawCommand)
     local user_id = vRP.getUserId(source)
     if user_id ~= nil then
         if vRP.hasPermission(user_id,"mindmaster.permissao") or vRP.hasPermission(user_id,"administrador.permissao") then
@@ -1330,7 +1329,7 @@ RegisterCommand('clearallobj', function(source, args, rawCommand)
             end
 
             print(json.encode(entityList, { indent = true }))
-            TriggerClientEvent('chatMessage', -1, "^1ADMIN: ^0"..deleteCount.." objetos deletados!")
+            TriggerClientEvent("chatMessage", -1, "^1ADMIN: ^0"..deleteCount.." objetos deletados!")
         end
     end
 end)
@@ -1342,34 +1341,34 @@ local tempbanOptions = {
 	[2] = { days = 2, prision = 250, penalty = 500000 },
 	[3] = { days = 7, prision = 500, penalty = 1000000 }
 }
-local webhooktempban = ''
-RegisterCommand('tempban',function(source,args)
+local webhooktempban = ""
+RegisterCommand("tempban",function(source,args)
 	local userId = vRP.getUserId(source)
-	if vRP.hasPermission(userId,'ajudante.permissao') then
+	if vRP.hasPermission(userId,"ajudante.permissao") then
 		local identity = vRP.getUserIdentity(userId)
-		local optionToBan = vRP.prompt(source,'Qual opção de tempbanimento você deseja? 1, 2 ou 3? Digite abaixo:','')
+		local optionToBan = vRP.prompt(source,"Qual opção de tempbanimento você deseja? 1, 2 ou 3? Digite abaixo:","")
 		local otherId = parseInt(args[1])
 		local bannedOption = parseInt(optionToBan)
 		local sourceOtherPlayer = vRP.getUserSource(otherId)
 		local tableOptions = tempbanOptions[bannedOption]
-		print('aqui dentroaaa')
+		print("aqui dentroaaa")
 		if tempbanOptions[bannedOption] then
 			local daysInSeconds = tableOptions.days * 24 * 60 * 60
 			local value = vRP.getUData(otherId,"vRP:multas")
     		local multas = json.decode(value) or 0
-			print('aqui dentro')
-			print('here')
+			print("aqui dentro")
+			print("here")
 			if sourceOtherPlayer then
-				print('trying')
+				print("trying")
 				local ped = GetPlayerPed(sourceOtherPlayer)
-				vRP.dropPlayer(sourceOtherPlayer,'Você foi banido temporariamente!', {
+				vRP.dropPlayer(sourceOtherPlayer,"Você foi banido temporariamente!", {
 					armour = GetPedArmour(ped),
 					coords = GetEntityCoords(ped)
 				})
-				vRP.kick(sourceOtherPlayer,'Você foi banido temporariamente!')
+				vRP.kick(sourceOtherPlayer,"Você foi banido temporariamente!")
 			end
-			vRP.setUData(otherId,'arthur:Tempban',json.encode(os.time() +  daysInSeconds))
-			vRP.setUData(otherId,'vRP:prisao', json.encode(tableOptions.prision))
+			vRP.setUData(otherId,"arthur:Tempban",json.encode(os.time() +  daysInSeconds))
+			vRP.setUData(otherId,"vRP:prisao", json.encode(tableOptions.prision))
 			vRP.setUData(otherId,"vRP:multas",json.encode(multas+tableOptions.penalty))
 			SendWebhookMessage(webhooktempban,"prolog\n[ID]: "..user_id.." "..identity.name.." "..identity.firstname.." \n[TEMPBANIU]: "..otherId.." \n[TEMPO]: "..tableOptions.days.." dia(s) "..os.date("\n[Data]: %d/%m/%Y [Hora]: %H:%M:%S").." \r") 
 		end
